@@ -1,8 +1,8 @@
 package pers.lxl.mylearnproject.javase.oop;
-
+//extends Object
 public class Person {
-    private String name;
-    private int age;
+    protected String name;
+    protected int age;
 //自定义构造方法，没有返回值（也没有void），调用构造方法，必须用new操作符。
 //    不编写会有默认构造方法，自定义后不会自动创建无参构造方法
     public Person(String name, int age) {

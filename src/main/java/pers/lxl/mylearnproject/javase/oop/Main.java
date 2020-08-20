@@ -7,7 +7,7 @@ public class Main {
         Person p2 = new Person("lxl2",21);
         System.out.println(p1.getName()+p1.getAge());
         System.out.println(p2.getName()+p2.getAge());
-        //Method
+        //Method Overloading
         Person li=new Person();
         Person xiao=new Person();
         li.setName("lxl");
