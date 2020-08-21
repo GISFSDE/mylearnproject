@@ -1,5 +1,6 @@
 package pers.lxl.mylearnproject.javase.oop;
-
+//Java定义了一种名字空间，称之为包：package。一个类总是属于某个包，
+// 类名（比如Person）只是一个简写，真正的完整类名是包名.类名,包名不同，类就不同
 public class Main {
     public static void main(String[] args) {
         //Construction Method
