@@ -4,6 +4,8 @@ public class Person {
     protected String name;
     protected int age;
 
+//    final定义类不能被继承，定义方法之后不能被覆写，定义字段后不能被更改
+
     public void run(){
         System.out.println("Person run");
     }

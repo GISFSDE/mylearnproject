@@ -24,7 +24,8 @@ public class Main {
 //        Java 14开始，判断instanceof后，可以直接转型为指定变量，避免再次强制转型
 //        System.out.println(ss1 instanceof Person);
 //        System.out.println(ss1 instanceof Student);
-        //覆写（Override）Override和Overload不同的是，如果方法签名如果不同，就是Overload，Overload方法是一个新方法；如果方法签名相同，并且返回值也相同，就是Override。
+        //覆写（Override）
+        // Override和Overload不同的是，如果方法签名如果不同，就是Overload，Overload方法是一个新方法；如果方法签名相同，并且返回值也相同，就是Override。
         //方法返回值不同，也是不同的方法。在Java程序中，出现这种情况，编译器会报错。
           Person pp = new Student();
           p.run();
