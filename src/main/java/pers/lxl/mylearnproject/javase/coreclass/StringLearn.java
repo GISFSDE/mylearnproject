@@ -29,9 +29,10 @@ public class StringLearn {
         String ssss=String.valueOf(123.32);//把任意基本类型或引用类型转换为字符串
         System.out.println(ssss);
         int n2 = Integer.parseInt("ff", 16); // 按十六进制转换，255
-        System.out.println(n2);
+        System.out.println(n2);//Java的String和char在内存中总是以Unicode编码表示
         char[] cs = "Hello".toCharArray(); // String -> char[]
         String sss = new String(cs); // char[] -> String
+
     }
 
 
