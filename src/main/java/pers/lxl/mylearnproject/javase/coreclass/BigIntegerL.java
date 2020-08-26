@@ -22,6 +22,8 @@ public class BigIntegerL {
          如果BigInteger表示的范围超过了基本类型的范围，
          转换时将丢失高位信息，即结果不一定是准确的。如果需要准确地转换成基本类型，
          可以使用intValueExact()、longValueExact()等方法，在转换时如果超出范围，
-         将直接抛出ArithmeticException异常*/
+         将直接抛出ArithmeticException异常
+         如果BigInteger的值甚至超过了float的最大范围（3.4x1038），那么返回的float为Infinity*/
+
     }
 }
