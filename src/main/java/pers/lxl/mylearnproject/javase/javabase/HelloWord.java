@@ -8,7 +8,7 @@ public class HelloWord {
         double d = 3.1415926;
 //        pringtf格式化输出
         System.out.printf("%.2f\n", d);
-//        【数组】-------------------------------
+//        【数组Array】-------------------------------
         int[] array = {21, 12, 5, 3, 2, 3, 556, 778, 1};
 //        foreach变量直接取数组元素，而不是for中取的索引
         for (int n : array) {
