@@ -5,7 +5,7 @@ import pers.lxl.mylearnproject.javase.oop.Student;
 import java.util.HashMap;
 import java.util.Map;
 
-//Map,（key-value）,快速查找
+//Map,（key-value）,快速查找，key不能重复，需要正确覆写equals()，hashCode()方法
 public class MapL {
     public static void main(String[] args) {
         Student s = new Student("Kaa", 12, 21);
