@@ -11,7 +11,7 @@ public class TreeMapL {
 // 那么，必须在创建TreeMap时同时指定一个自定义排序算法
         Map<Person,Integer> map=new TreeMap<>(new Comparator<Person>() {
             @Override
-            public int compare(Person o1, Person o2) {
+            public int compare(Person o1, Person o2) {//必须返回0,1，-1
                 return o1.name.compareTo(o2.name);//compareTo字符串与对象进行比较。 按字典顺序比较两个字符串
             }
         });
