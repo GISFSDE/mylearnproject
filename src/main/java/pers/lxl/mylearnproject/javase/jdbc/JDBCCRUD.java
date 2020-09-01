@@ -9,7 +9,7 @@ import java.sql.*;
 jdbc:mysql://<hostname>:<port>/<db>?key1=value1&key2=value2
 假设数据库运行在本机localhost，端口使用标准的3306，数据库名称是learnjdbc，那么URL如下：
 jdbc:mysql://localhost:3306/learnjdbc?useSSL=false&characterEncoding=utf8*/
-public class JDBCL {
+public class JDBCCRUD {
     public static void main(String[] args) throws SQLException {
         String JDBC_URL = "jdbc:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";//?serverTimezone=GM解决TserverTimezone
         String JDBC_USER = "root";
@@ -50,6 +50,8 @@ public class JDBCL {
 //            避免二：使用PreparedStatement。使用PreparedStatement可以完全避免SQL注入的问题，因为PreparedStatement始终使用?作为占位符，
 //            并且把数据连同SQL本身传给数据库，这样可以保证每次传给数据库的SQL语句是相同的，只是占位符的数据不同，还能高效利用数据库本身对查询的缓存。
         //--正确如下--CRUD：Create，Retrieve，Update和Delete
+        //次序---》获取连接--》创建Statement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果--》关闭连接（try后不用，自动关闭）
+        //prepareStatement次序---》获取连接--》创建prepareStatement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
             try (PreparedStatement ps = conn.prepareStatement("SELECT id, grade, name, gender FROM students WHERE gender=? AND grade=?")) {
                 ps.setObject(1, "B"); // 注意：索引从1开始
