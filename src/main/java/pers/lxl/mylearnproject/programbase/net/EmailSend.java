@@ -5,7 +5,7 @@ package pers.lxl.mylearnproject.programbase.net;
 * MUA到MTA发送邮件的协议就是SMTP协议，它是Simple Mail Transport Protocol的缩写，使用标准端口25，也可以使用加密端口465或587。
 SMTP协议是一个建立在TCP之上的协议，任何程序发送邮件都必须遵守SMTP协议。使用Java程序发送邮件时，我们无需关心SMTP协议的底层原理，
 * 只需要使用JavaMail这个标准API就可以直接发送邮件。*/
-
+//MUA--》MTA--》MTA--》MDA《--MUA
 import javax.activation.DataHandler;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -56,11 +56,15 @@ public class EmailSend {
 // 添加text:
         BodyPart textpart = new MimeBodyPart();
         textpart.setContent("Hi BB", "text/html;charset=utf-8");
+        //发送内嵌图片的HTML邮件
+        textpart.setContent("<h1>Hello</h1><p><img src=\"cid:img01\"></p>", "text/html;charset=utf-8");
         multipart.addBodyPart(textpart);
 // 添加image:
         BodyPart imagepart = new MimeBodyPart();
         imagepart.setFileName("微信图片_20200821174645.jpg");
         imagepart.setDataHandler(new DataHandler(new ByteArrayDataSource("C:\\Users\\Administrator\\Desktop\\lixianglun\\微信图片_20200821174645.jpg", "application/octet-stream")));
+        // 与HTML的<img src="cid:img01">关联:
+        imagepart.setHeader("Content-ID", "<img01>");
         multipart.addBodyPart(imagepart);
 // 设置邮件内容为multipart:
         message.setContent(multipart);
