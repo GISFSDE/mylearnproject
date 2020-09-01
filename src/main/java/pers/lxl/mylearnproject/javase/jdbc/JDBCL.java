@@ -1,5 +1,7 @@
 package pers.lxl.mylearnproject.javase.jdbc;
 
+import org.junit.Test;
+
 import java.sql.*;
 
 /*JDBC（Java DataBase Connectivity）Java程序访问数据库的标准接口
@@ -35,12 +37,12 @@ public class JDBCL {
 //                    }
 //                }
 //            }
-            //Statment和ResultSet都是需要关闭的资源，因此嵌套使用try (resource)确保及时关闭；
-            //rs.next()用于判断是否有下一行记录，如果有，将自动把当前行移动到下一行（一开始获得ResultSet时当前行不是第一行）；
-            //ResultSet获取列时，索引从1开始而不是0；
-            //必须根据SELECT的列的对应位置来调用getLong(1)，getString(2)这些方法，否则对应位置的数据类型不对，将报错。
-            //关闭连接,try之后不需要了
-           // conn.close();
+        //Statment和ResultSet都是需要关闭的资源，因此嵌套使用try (resource)确保及时关闭；
+        //rs.next()用于判断是否有下一行记录，如果有，将自动把当前行移动到下一行（一开始获得ResultSet时当前行不是第一行）；
+        //ResultSet获取列时，索引从1开始而不是0；
+        //必须根据SELECT的列的对应位置来调用getLong(1)，getString(2)这些方法，否则对应位置的数据类型不对，将报错。
+        //关闭连接,try之后不需要了
+        // conn.close();
 
 //        }
         //--SQL注入--   比如pass = " OR pass='"
@@ -58,11 +60,47 @@ public class JDBCL {
                         long grade = rs.getLong("grade");
                         String name = rs.getString("name");
                         String gender = rs.getString("gender");
-                        System.out.println(id+" "+grade+" "+name+" "+gender);
+                        System.out.println(id + " " + grade + " " + name + " " + gender);
                     }
                 }
             }
         }
+        //--插入--
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            try (PreparedStatement ps = conn.prepareStatement(
+                    //---插入并获取自增主键的值---Statement.RETURN_GENERATED_KEYS
+                    "INSERT INTO students (id,grade,name,gender) VALUES (?,?,?,?)",Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setObject(1, 994);
+                    ps.setObject(2, 1);
+                    ps.setObject(3, "LXL");
+                    ps.setObject(4, 1);
+                    int n = ps.executeUpdate();//插入记录数量
+                try (ResultSet resultSet = ps.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        long id = resultSet.getLong(1);//索引从1开始
+                        System.out.println(id);
+                        System.out.println(ps);
+                        System.out.println(n);
+                    }
+                }
+            }
+        }
+            //--更新--
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            try (PreparedStatement ps = connection.prepareStatement("UPDATE students SET name =? WHERE id =?")) {
+                ps.setObject(1,"Bob");
+                ps.setObject(2,22);
+                int n = ps.executeUpdate();//返回更新行数
+            }
+        }
+            //--更新--
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            try (PreparedStatement ps = connection.prepareStatement("DELETE FROM students WHERE identity =?")) {
+                ps.setObject(1,999);
+                int n = ps.executeUpdate();//删除行数
+            }
+        }
+
     }
 
 }
