@@ -25,9 +25,9 @@ public class EmailSend {
         // 服务器地址:
         String smtp = "smtp.qq.com";
         // 登录用户名:
-        String username = "714416426@qq.com";
+        String username = " ";
         // 登录口令:
-        String password = "anxbb0724";
+        String password = " ";
         // 连接到SMTP服务器587端口:
         Properties props = new Properties();
         props.put("mail.smtp.host", smtp); // SMTP主机名

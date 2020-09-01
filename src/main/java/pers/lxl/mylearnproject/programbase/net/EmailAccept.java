@@ -17,8 +17,8 @@ public class EmailAccept {
         // 准备登录信息:
         String host = "smtp.qq.com";
         int port = 465;
-        String username = "714416426@qq.com";
-        String password = "anxbb0724";
+        String username = " ";
+        String password = " ";
 
         Properties props = new Properties();
         props.setProperty("mail.store.protocol", "pop3"); // 协议名称
