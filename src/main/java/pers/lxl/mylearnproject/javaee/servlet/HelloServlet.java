@@ -15,10 +15,14 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
         // 设置响应类型:
         resp.setContentType("text/html");
+        String name = req.getParameter("name");
+        if (name == null) {
+            name = "world";
+        }
         // 获取输出流:
         PrintWriter pw = resp.getWriter();
         // 写入响应:
-        pw.write("<h1>Hello, world!</h1>");
+        pw.write("<h1>Hello, "+name+"</h1>");
         // 最后不要忘记flush强制输出:
         pw.flush();
     }
@@ -34,3 +38,28 @@ public class HelloServlet extends HttpServlet {
 //HttpServletRequest和HttpServletResponse实例是由Servlet容器传入的局部变量，它们只能被当前线程访问，不存在多个线程访问的问题；
 //在doGet()或doPost()方法中，如果使用了ThreadLocal，但没有清理，那么它的状态很可能会影响到下次的某个请求，因为Servlet容器很可能用线程池实现线程复用。
 //因此，正确编写Servlet，要清晰理解Java的多线程模型，需要同步访问的必须同步。
+
+
+//tomcat手动程序启动
+//启动简单，无需下载Tomcat或安装任何IDE插件；
+//调试方便，可在IDE中使用断点调试；
+//使用Maven创建war包后，也可以正常部署到独立的Tomcat服务器中。
+
+
+//<packaging>类型仍然为war，引入依赖tomcat-embed-core和tomcat-embed-jasper，引入的Tomcat版本<tomcat.version>为9.0.26
+//public class Main {
+//    public static void main(String[] args) throws Exception {
+//        // 启动Tomcat:
+//        Tomcat tomcat = new Tomcat();
+//        tomcat.setPort(Integer.getInteger("port", 8080));
+//        tomcat.getConnector();
+//        // 创建webapp:
+//        Context ctx = tomcat.addWebapp("", new File("src/main/webapp").getAbsolutePath());
+//        WebResourceRoot resources = new StandardRoot(ctx);
+//        resources.addPreResources(
+//                new DirResourceSet(resources, "/WEB-INF/classes", new File("target/classes").getAbsolutePath(), "/"));
+//        ctx.setResources(resources);
+//        tomcat.start();
+//        tomcat.getServer().await();
+//    }
+//}
