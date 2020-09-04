@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
-       xmlns:c="http://www.springframework.org/schema/c"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:util="http://www.springframework.org/schema/util"
+               xmlns:c="http://www.springframework.org/schema/c"
+               xmlns:p="http://www.springframework.org/schema/p"
+               xmlns:util="http://www.springframework.org/schema/util"
 
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:context="http://www.springframework.org/schema/context"
+               xmlns:aop="http://www.springframework.org/schema/aop"
+               xmlns:tx="http://www.springframework.org/schema/tx"
+               xmlns:context="http://www.springframework.org/schema/context"
 
-       xsi:schemaLocation="
+               xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
 
@@ -20,176 +20,176 @@
        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-    <!--引入了 xsd 文件，它是一个根元素，这样它所定义的元素将可以定义对应的 Spring Bean-->
+<!--引入了 xsd 文件，它是一个根元素，这样它所定义的元素将可以定义对应的 Spring Bean-->
 
-    <!--IOC(工厂模式)-->
-    <!--每个<bean ...>都有一个id标识，相当于Bean的唯一ID；
-    在userServiceBean中，通过<property name="..." ref="..." />注入了另一个Bean；
-    Bean的顺序不重要，Spring根据依赖关系会自动正确初始化。-->
-    <bean name="source" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Source">
-        <property name="fruit" value="橙子"/>
-        <property name="sugar" value="多糖"/>
-        <property name="size" value="超大杯"/>
-    </bean>
-    <!--DI   DI 相对 IoC 而言，明确描述了“被注入对象依赖 IoC 容器配置依赖对象”-->
-    <bean name="juickMaker" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.JuiceMaker">
-        <!--相互引用-->
-        <property name="source" ref="source"/>
-    </bean>
-    <!--AOP-->
-    <bean name="productService" class="pers.lxl.mylearnproject.frame.spring.aop.service.ProductService"/>
-    <!--日志-->
-    <bean id="loggerAspect" class="pers.lxl.mylearnproject.frame.spring.aop.aspect.LoggerAspect"/>
+<!--IOC(工厂模式)-->
+<!--每个<bean ...>都有一个id标识，相当于Bean的唯一ID；
+在userServiceBean中，通过<property name="..." ref="..." />注入了另一个Bean；
+Bean的顺序不重要，Spring根据依赖关系会自动正确初始化。-->
+<bean name="source" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Source">
+    <property name="fruit" value="橙子"/>
+    <property name="sugar" value="多糖"/>
+    <property name="size" value="超大杯"/>
+</bean>
+<!--DI   DI 相对 IoC 而言，明确描述了“被注入对象依赖 IoC 容器配置依赖对象”-->
+<bean name="juickMaker" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.JuiceMaker">
+    <!--相互引用-->
+    <property name="source" ref="source"/>
+</bean>
+<!--AOP-->
+<bean name="productService" class="pers.lxl.mylearnproject.frame.spring.aop.service.ProductService"/>
+<!--日志-->
+<bean id="loggerAspect" class="pers.lxl.mylearnproject.frame.spring.aop.aspect.LoggerAspect"/>
 
-    <!-- 配置AOP -->
-    <aop:config>
-        <!-- where：pointcut在哪些地方（包.类.方法）做增加 -->
-        <!--匹配所有类public方法  execution(public * *(..))
-        匹配指定包下所有类方法 execution(* com.baidu.dao.*(..)) 不包含子包
-        execution(* com.baidu.dao..*(..))  ..*表示包、子孙包下所有类
-        匹配指定类所有方法 execution(* com.baidu.service.UserService.*(..))
-        匹配实现特定接口所有类方法execution(* com.baidu.dao.GenericDAO+.*(..))
-        匹配所有save开头的方法 execution(* save*(..))-->
-        <aop:pointcut id="loggerCutpoint"
-                      expression="execution(* pers.lxl.mylearnproject.frame.spring.aop.service.ProductService.*(..)) "/>
+<!-- 配置AOP -->
+<aop:config>
+    <!-- where：pointcut在哪些地方（包.类.方法）做增加 -->
+    <!--匹配所有类public方法  execution(public * *(..))
+    匹配指定包下所有类方法 execution(* com.baidu.dao.*(..)) 不包含子包
+    execution(* com.baidu.dao..*(..))  ..*表示包、子孙包下所有类
+    匹配指定类所有方法 execution(* com.baidu.service.UserService.*(..))
+    匹配实现特定接口所有类方法execution(* com.baidu.dao.GenericDAO+.*(..))
+    匹配所有save开头的方法 execution(* save*(..))-->
+    <aop:pointcut id="loggerCutpoint"
+                  expression="execution(* pers.lxl.mylearnproject.frame.spring.aop.service.ProductService.*(..)) "/>
 
-        <!-- what:aspect做什么增强 -->
-        <aop:aspect id="logAspect" ref="loggerAspect">
-            <!-- when:around在什么时机（方法前/后/前后） -->
-            <aop:around pointcut-ref="loggerCutpoint" method="log"/>
-        </aop:aspect>
-    </aop:config>
-
-
-    <!--装配复杂的东西-->
-    <bean id="complexAssembly" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.ComplexAssembly">
-        <!-- 装配Long类型的id -->
-        <property name="id" value="1"/>
-
-        <!-- 装配List类型的list -->
-        <property name="list">
-            <list>
-                <value>value-list-1</value>
-                <value>value-list-2</value>
-                <value>value-list-3</value>
-            </list>
-        </property>
-
-        <!-- <property name="list">
-             <list>
-                 <ref bean="bean1"/>
-                 <ref bean="bean2"/>
-             </list>
-         </property>-->
-
-        <!-- 装配Map类型的map -->
-        <property name="map">
-            <map>
-                <entry key="key1" value="value-key-1"/>
-                <entry key="key2" value="value-key-2"/>
-                <entry key="key3" value="value-key-2"/>
-            </map>
-        </property>
-
-        <!--<property name="map">
-            <map>
-                <entry key-ref="keyBean" value-ref="valueBean"/>
-            </map>
-        </property>-->
+    <!-- what:aspect做什么增强 -->
+    <aop:aspect id="logAspect" ref="loggerAspect">
+        <!-- when:around在什么时机（方法前/后/前后） -->
+        <aop:around pointcut-ref="loggerCutpoint" method="log"/>
+    </aop:aspect>
+</aop:config>
 
 
-        <!-- 装配Properties类型的properties -->
-        <property name="properties">
-            <props>
-                <prop key="prop1">value-prop-1</prop>
-                <prop key="prop2">value-prop-2</prop>
-                <prop key="prop3">value-prop-3</prop>
-            </props>
-        </property>
+<!--装配复杂的东西-->
+<bean id="complexAssembly" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.ComplexAssembly">
+    <!-- 装配Long类型的id -->
+    <property name="id" value="1"/>
 
-        <!-- 装配Set类型的set -->
-        <property name="set">
-            <set>
-                <value>value-set-1</value>
-                <value>value-set-2</value>
-                <value>value-set-3</value>
-            </set>
-        </property>
-
-        <!--<property name="set">
-            <set>
-                <ref bean="bean"/>
-            </set>
-        </property>-->
-
-        <!-- 装配String[]类型的array -->
-        <property name="array">
-            <array>
-                <value>value-array-1</value>
-                <value>value-array-2</value>
-                <value>value-array-3</value>
-            </array>
-        </property>
-    </bean>
-
-    <!--id 属性是 Spring 能找到当前 Bean 的一个依赖的编号，遵守 XML 语法的 ID 唯一性约束。必须以字母开头，可以使用字母、数字、连字符、下划线、句号、冒号，不能以 / 开头。
-    不过 id 属性不是一个必需的属性，name 属性也可以定义 bean 元素的名称，能以逗号或空格隔开起多个别名，并且可以使用很多的特殊字符，比如在 Spring 和 Spring MVC 的整合中，就得使用 name 属性来定义 bean 的名称，并且使用 / 开头。
-    注意： 从 Spring 3.1 开始，id 属性也可以是 String 类型了，也就是说 id 属性也可以使用 / 开头，而 bean 元素的 id 的唯一性由容器负责检查。
-    如果 id 和 name 属性都没有声明的话，那么 Spring 将会采用 “全限定名#{number}” 的格式生成编号。 例如这里，如果没有声明 “id="c"” 的话，那么 Spring 为其生成的编号就是 “pojo.Category#0”，当它第二次声明没有 id 属性的 Bean 时，编号就是 “pojo.Category#1”，以此类推。
-    class 属性显然就是一个类的全限定名
-    property 元素是定义类的属性，其中的 name 属性定义的是属性的名称，而 value 是它的值。-->
-
-    <!--命名空间装配
-    使用命名空间的时候要先引入对应的命名空间和 XML 模式（XSD）文件。-->
-
-    <!--——【① c-命名空间】——
-    c-命名空间是在 Spring 3.0 中引入的，它是在 XML 中更为简洁地描述构造器参数的方式，要使用它的话，必须要在 XML 的顶部声明其模式-->
-    <!-- 引入 c-命名空间之前 -->
-    <bean name="student1" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student">
-        <constructor-arg name="id" value="1"/><!--要装配的构造器参数名-->
-        <constructor-arg name="name" value="学生1"/>
-        <!--如果需要注入对象的话则要跟上 -ref（如c:card-ref="idCard1"，则对 card 这个构造器参数注入之前配置的名为 idCard1 的 bean）-->
-    </bean>
-
-    <!-- 引入 c-命名空间之后 -->
-    <bean name="student2" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student"
-          c:id="2" c:name="学生2"/>
-    <!--或者-->
-    <bean name="student3" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student"
-          c:_0="3" c:_1="学生3"/>
-    <!--参数的索引。因为在 XML 中不允许数字作为属性的第一个字符，因此必须要添加一个下划线来作为前缀-->
-
-
-    <!--——【② p-命名空间】——
-c-命名空间通过构造器注入的方式来配置 bean，p-命名空间则是用setter的注入方式来配置 bean ，同样的，我们需要引入声明-->
-    <!-- 引入p-命名空间之前 -->
-    <!--需要先删掉 Student 类中的构造函数，不然 XML 约束会提示我们配置 <constructor-arg> 元素-->
-    <!--<bean name="student4" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student">
-        <property name="id" value="1" />
-        <property name="name" value="学生1"/>
-    </bean>
-
-    &lt;!&ndash; 引入p-命名空间之后 &ndash;&gt;
-    <bean name="student5" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student"
-          p:id="2" p:name="学生2"/>-->
-
-    <!--——【③ util-命名空间】——
-工具类的命名空间，可以简化集合类元素的配置，同样的我们需要引入其声明（无需担心怎么声明的问题，IDEA会有很友好的提示）-->
-    <!-- 引入util-命名空间之前 -->
-    <!--<property name="list">
+    <!-- 装配List类型的list -->
+    <property name="list">
         <list>
-            <ref bean="bean1"/>
-            <ref bean="bean2"/>
+            <value>value-list-1</value>
+            <value>value-list-2</value>
+            <value>value-list-3</value>
         </list>
     </property>
 
-    &lt;!&ndash; 引入util-命名空间之后 &ndash;&gt;
-    <util:list id="list">
+    <!-- <property name="list">
+         <list>
+             <ref bean="bean1"/>
+             <ref bean="bean2"/>
+         </list>
+     </property>-->
+
+    <!-- 装配Map类型的map -->
+    <property name="map">
+        <map>
+            <entry key="key1" value="value-key-1"/>
+            <entry key="key2" value="value-key-2"/>
+            <entry key="key3" value="value-key-2"/>
+        </map>
+    </property>
+
+    <!--<property name="map">
+        <map>
+            <entry key-ref="keyBean" value-ref="valueBean"/>
+        </map>
+    </property>-->
+
+
+    <!-- 装配Properties类型的properties -->
+    <property name="properties">
+        <props>
+            <prop key="prop1">value-prop-1</prop>
+            <prop key="prop2">value-prop-2</prop>
+            <prop key="prop3">value-prop-3</prop>
+        </props>
+    </property>
+
+    <!-- 装配Set类型的set -->
+    <property name="set">
+        <set>
+            <value>value-set-1</value>
+            <value>value-set-2</value>
+            <value>value-set-3</value>
+        </set>
+    </property>
+
+    <!--<property name="set">
+        <set>
+            <ref bean="bean"/>
+        </set>
+    </property>-->
+
+    <!-- 装配String[]类型的array -->
+    <property name="array">
+        <array>
+            <value>value-array-1</value>
+            <value>value-array-2</value>
+            <value>value-array-3</value>
+        </array>
+    </property>
+</bean>
+
+<!--id 属性是 Spring 能找到当前 Bean 的一个依赖的编号，遵守 XML 语法的 ID 唯一性约束。必须以字母开头，可以使用字母、数字、连字符、下划线、句号、冒号，不能以 / 开头。
+不过 id 属性不是一个必需的属性，name 属性也可以定义 bean 元素的名称，能以逗号或空格隔开起多个别名，并且可以使用很多的特殊字符，比如在 Spring 和 Spring MVC 的整合中，就得使用 name 属性来定义 bean 的名称，并且使用 / 开头。
+注意： 从 Spring 3.1 开始，id 属性也可以是 String 类型了，也就是说 id 属性也可以使用 / 开头，而 bean 元素的 id 的唯一性由容器负责检查。
+如果 id 和 name 属性都没有声明的话，那么 Spring 将会采用 “全限定名#{number}” 的格式生成编号。 例如这里，如果没有声明 “id="c"” 的话，那么 Spring 为其生成的编号就是 “pojo.Category#0”，当它第二次声明没有 id 属性的 Bean 时，编号就是 “pojo.Category#1”，以此类推。
+class 属性显然就是一个类的全限定名
+property 元素是定义类的属性，其中的 name 属性定义的是属性的名称，而 value 是它的值。-->
+
+<!--命名空间装配
+使用命名空间的时候要先引入对应的命名空间和 XML 模式（XSD）文件。-->
+
+<!--——【① c-命名空间】——
+c-命名空间是在 Spring 3.0 中引入的，它是在 XML 中更为简洁地描述构造器参数的方式，要使用它的话，必须要在 XML 的顶部声明其模式-->
+<!-- 引入 c-命名空间之前 -->
+<bean name="student1" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student">
+    <constructor-arg name="id" value="1"/><!--要装配的构造器参数名-->
+    <constructor-arg name="name" value="学生1"/>
+    <!--如果需要注入对象的话则要跟上 -ref（如c:card-ref="idCard1"，则对 card 这个构造器参数注入之前配置的名为 idCard1 的 bean）-->
+</bean>
+
+<!-- 引入 c-命名空间之后 -->
+<bean name="student2" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student"
+      c:id="2" c:name="学生2"/>
+<!--或者-->
+<bean name="student3" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student"
+      c:_0="3" c:_1="学生3"/>
+<!--参数的索引。因为在 XML 中不允许数字作为属性的第一个字符，因此必须要添加一个下划线来作为前缀-->
+
+
+<!--——【② p-命名空间】——
+c-命名空间通过构造器注入的方式来配置 bean，p-命名空间则是用setter的注入方式来配置 bean ，同样的，我们需要引入声明-->
+<!-- 引入p-命名空间之前 -->
+<!--需要先删掉 Student 类中的构造函数，不然 XML 约束会提示我们配置 <constructor-arg> 元素-->
+<!--<bean name="student4" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student">
+    <property name="id" value="1" />
+    <property name="name" value="学生1"/>
+</bean>
+
+&lt;!&ndash; 引入p-命名空间之后 &ndash;&gt;
+<bean name="student5" class="pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Student"
+      p:id="2" p:name="学生2"/>-->
+
+<!--——【③ util-命名空间】——
+工具类的命名空间，可以简化集合类元素的配置，同样的我们需要引入其声明（无需担心怎么声明的问题，IDEA会有很友好的提示）-->
+<!-- 引入util-命名空间之前 -->
+<!--<property name="list">
+    <list>
         <ref bean="bean1"/>
         <ref bean="bean2"/>
-    </util:list>-->
-    <!-- util-命名空间提供的所有元素:
-    元素	描述
+    </list>
+</property>
+
+&lt;!&ndash; 引入util-命名空间之后 &ndash;&gt;
+<util:list id="list">
+    <ref bean="bean1"/>
+    <ref bean="bean2"/>
+</util:list>-->
+<!-- util-命名空间提供的所有元素:
+元素	描述
 <util:constant>	引用某个类型的 public static 域，并将其暴露为 bean
 <util:list>	创建一个 java.util.List 类型的 bean，其中包含值或引用
 <util:map>	创建一个 java.util.map 类型的 bean，其中包含值或引用
@@ -200,17 +200,93 @@ c-命名空间通过构造器注入的方式来配置 bean，p-命名空间则�
 
 
 
-    <!--在实际开发中，随着应用程序规模的增加，系统中 <bean> 元素配置的数量也会大大增加，导致 applicationContext.xml 配置文件变得非常臃肿难以维护。
+<!--在实际开发中，随着应用程序规模的增加，系统中 <bean> 元素配置的数量也会大大增加，导致 applicationContext.xml 配置文件变得非常臃肿难以维护。
 解决方案：让 applicationContext.xml 文件包含其他配置文件即可
 使用 <import> 元素引入其他配置文件
-    1.在【src】文件下新建一个 bean.xml 文件，写好基础的约束，把 applicationContext.xml 文件中配置的 <bean> 元素复制进去
-    2.在 applicationContext.xml 文件中写入：
-    <import resource="XXXX.xml"/>-->
-</beans>
+1.在【src】文件下新建一个 bean.xml 文件，写好基础的约束，把 applicationContext.xml 文件中配置的 <bean> 元素复制进去
+2.在 applicationContext.xml 文件中写入：
+<import resource="XXXX.xml"/>-->
+
 
 
 
 <!--最后，现在基本不用xml，用注解了，哈哈哈哈哈哈哈哈嗝~-->
+<!--优势：
+1.可以减少 XML 的配置，当配置项多的时候，臃肿难以维护
+2.功能更加强大，既能实现 XML 的功能，也提供了自动装配的功能，采用了自动装配后，程序猿所需要做的决断就少了，更加有利于对程序的开发，这就是“约定由于配置”的开发原则
+在 Spring 中，它提供了两种方式来让 Spring IoC 容器发现 bean：
+组件扫描：通过定义资源的方式，让 Spring IoC 容器扫描对应的包，从而把 bean 装配进来。
+自动装配：通过注解定义，使得一些依赖关系可以通过注解完成。-->
+
+
+<context:component-scan base-package="pers.lxl.mylearnproject.frame.spring.annotation.aspect" />
+<context:component-scan base-package="pers.lxl.mylearnproject.frame.spring.annotation.pojo" />
+
+<aop:aspectj-autoproxy/>
 
 
 
+
+<!--使用 XML 配置开发 Spring AOP
+注解是很强大的东西，但基于 XML 的开发我们仍然需要了解，我们先来了解一下 AOP 中可以配置的元素：
+
+AOP 配置元素	    用途	            备注
+aop:advisor	    定义 AOP 的通知其	一种很古老的方式，很少使用
+aop:aspect	    定义一个切面	        ——
+aop:before	    定义前置通知	        ——
+aop:after	    定义后置通知	        ——
+aop:around	    定义环绕通知            ——
+aop:after-returning	定义返回通知	    ——
+aop:after-throwing	定义异常通知	    ——
+aop:config	顶层的 AOP 配置元素	      AOP 的配置是以它为开始的
+aop:declare-parents	给通知引入新的额外接口，增强功能	——
+aop:pointcut	   定义切点	            ——
+有了之前通过注解来编写的经验，并且有了上面的表，我们将上面的例子改写成 XML 配置很容易（去掉所有的注解）：
+
+&lt;!&ndash; 装配 Bean&ndash;&gt;
+<bean name="landlord" class="pojo.Landlord"/>
+<bean id="broker" class="aspect.Broker"/>
+
+&lt;!&ndash; 配置AOP &ndash;&gt;
+<aop:config>
+    &lt;!&ndash; where：在哪些地方（包.类.方法）做增加 &ndash;&gt;
+    <aop:pointcut id="landlordPoint"
+                  expression="execution(* pojo.Landlord.service())"/>
+    &lt;!&ndash; what:做什么增强 &ndash;&gt;
+    <aop:aspect id="logAspect" ref="broker">
+        &lt;!&ndash; when:在什么时机（方法前/后/前后） &ndash;&gt;
+        <aop:around pointcut-ref="landlordPoint" method="around"/>
+    </aop:aspect>
+</aop:config>-->
+
+<!--    配置方式：
+    使用简单数据库配置
+    使用第三方数据库连接池
+    我们可以使用 Spring 内置的类来配置，但大部分时候我们都会使用第三方数据库连接池来进行配置，由于使用第三方的类，一般采用 XML 文件配置的方式，我们这里也使用 XML 文件配置的形式-->
+
+<!--spring++jdbc使用简单数据库配置，一般使用第三方类-->
+<bean id="dateSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+    <property name="username" value="root"/>
+    <property name="password" value="root"/>
+    <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc://mysql://locolhost:3306/students"/>
+</bean>
+
+
+<!--C3P0数据库连接池：
+
+
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+    <property name="jdbcUrl" value="jdbc:mysql:///hib_demo"></property>
+    <property name="user" value="root"></property>
+    <property name="password" value="root"></property>
+    <property name="initialPoolSize" value="3"></property>
+    <property name="maxPoolSize" value="10"></property>
+    <property name="maxStatements" value="100"></property>
+    <property name="acquireIncrement" value="2"></property>
+</bean>
+-->
+
+
+</beans>

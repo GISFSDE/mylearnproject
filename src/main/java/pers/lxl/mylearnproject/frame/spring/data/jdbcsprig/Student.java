@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.jdbc;
+package pers.lxl.mylearnproject.frame.spring.data.jdbcsprig;
 
 public class Student {
     String name;

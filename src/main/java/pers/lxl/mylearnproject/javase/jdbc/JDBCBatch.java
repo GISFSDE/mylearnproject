@@ -16,7 +16,7 @@ public class JDBCBatch {
         students.setGender("1");
         students.setGrade(21);
         students.setName("Bof");
-        String JDBC_URL = "jdbc:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";//?serverTimezone=GM解决TserverTimezone
+        String JDBC_URL = "jdbcsprig:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";//?serverTimezone=GM解决TserverTimezone
         String JDBC_USER = "root";
         String JDBC_PASSWORD = "root";
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {

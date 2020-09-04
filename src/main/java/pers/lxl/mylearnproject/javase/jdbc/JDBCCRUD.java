@@ -6,12 +6,12 @@ import java.sql.*;
 
 /*JDBC（Java DataBase Connectivity）Java程序访问数据库的标准接口
 * URL是由数据库厂商指定的格式，例如，MySQL的URL是：
-jdbc:mysql://<hostname>:<port>/<db>?key1=value1&key2=value2
+jdbcsprig:mysql://<hostname>:<port>/<db>?key1=value1&key2=value2
 假设数据库运行在本机localhost，端口使用标准的3306，数据库名称是learnjdbc，那么URL如下：
-jdbc:mysql://localhost:3306/learnjdbc?useSSL=false&characterEncoding=utf8*/
+jdbcsprig:mysql://localhost:3306/learnjdbc?useSSL=false&characterEncoding=utf8*/
 public class JDBCCRUD {
     public static void main(String[] args) throws SQLException {
-        String JDBC_URL = "jdbc:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";//?serverTimezone=GM解决TserverTimezone
+        String JDBC_URL = "jdbcsprig:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";//?serverTimezone=GM解决TserverTimezone
         String JDBC_USER = "root";
         String JDBC_PASSWORD = "root";
 

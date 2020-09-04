@@ -21,6 +21,12 @@
     </properties>
 
     <dependencies>
+        <!--C3PO-->
+<!--        <dependency>-->
+<!--            <groupId>com.mchange</groupId>-->
+<!--            <artifactId>c3p0</artifactId>-->
+<!--            <version>0.9.1.2</version>-->
+<!--        </dependency>-->
         <!--Spring依赖-->
         <dependency>
             <groupId>org.springframework</groupId>

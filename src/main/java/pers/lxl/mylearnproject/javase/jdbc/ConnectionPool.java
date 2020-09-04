@@ -23,7 +23,7 @@ public class ConnectionPool {
 //    2.创建DataScourse实例
     public static void main(String[] args) throws SQLException {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql//localhost:3306/test");
+        config.setJdbcUrl("jdbcsprig:mysql//localhost:3306/test");
         config.setUsername("root");
         config.setPassword("root");
         config.addDataSourceProperty("connnectionTime","1000");// 连接超时：1秒
