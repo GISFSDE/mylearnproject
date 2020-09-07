@@ -19,7 +19,6 @@ import pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Source;
 */
 
 public class TestSpring {
-
     @Test
     public void test(){
         //ClassPathXmlApplicationContext会自动从classpath中查找指定的XML配置文件

@@ -36,6 +36,8 @@ Bean的顺序不重要，Spring根据依赖关系会自动正确初始化。-->
     <!--相互引用-->
     <property name="source" ref="source"/>
 </bean>
+
+
 <!--AOP-->
 <bean name="productService" class="pers.lxl.mylearnproject.frame.spring.aop.service.ProductService"/>
 <!--日志-->
