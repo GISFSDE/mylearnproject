@@ -22,7 +22,7 @@ public class StudentServiceImp implements StudentService{
 
 
     public void printStudentInfo() {
-        System.out.println("学生的 id 为：" + student.getName());
+        System.out.println("学生的 id 为：" + student.getId());
         System.out.println("学生的 name 为：" + student.getName());
     }
 }

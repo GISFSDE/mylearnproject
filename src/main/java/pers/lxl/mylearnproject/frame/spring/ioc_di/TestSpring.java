@@ -42,7 +42,7 @@ public class TestSpring {
         //④ 支持AOP功能；
         ApplicationContext context = new ClassPathXmlApplicationContext(
                // new String[]{"applicationContext.xml"}
-                "application.xml"
+                "application1.xml"
         );
 
         Source source = (Source) context.getBean("source");

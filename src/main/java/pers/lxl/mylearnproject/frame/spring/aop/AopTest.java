@@ -28,7 +28,7 @@ AOP 当中的概念：
 public class AopTest {
     @Test
     public void test(){
-    ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext("application1.xml");
     ProductService s = (ProductService) context.getBean("productService");
     s.doSomeService();
     }

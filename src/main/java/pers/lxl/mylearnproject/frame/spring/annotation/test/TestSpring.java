@@ -37,7 +37,7 @@ public class TestSpring {
 
         //aop测试
         ApplicationContext context3 =
-                new ClassPathXmlApplicationContext("application.xml");
+                new ClassPathXmlApplicationContext("application1.xml");
         Landlord landlord = (Landlord) context3.getBean("landlord", Landlord.class);
         landlord.service();
 
