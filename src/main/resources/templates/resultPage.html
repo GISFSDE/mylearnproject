@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Hello thymeleaf</title>
+</head>
+<body>
+<!--th:text 的值放在两个竖线中间，这意味着文本中所有的值都会连接在一起。-->
+<!--<span th:text="|Hello thymeleaf|">Hello html</span>-->
+<!--将数据传递给视图-->
+<span th:text="${message}">Hello html</span>
+</body>
+</html>
