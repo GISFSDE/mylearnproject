@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 @SpringBootConfiguration表明我们这个类将会处理spring的常规配置
 @EnableAutoConfiguration
 @ComponentScan 告诉spring在哪去找spring的组件（服务，控制器等），默认扫描当前包下所有子包
+*
 * */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, MongoAutoConfiguration.class})
 public class MylearnprojectApplication {
