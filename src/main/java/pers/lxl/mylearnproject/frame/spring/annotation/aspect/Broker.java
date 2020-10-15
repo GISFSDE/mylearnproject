@@ -58,4 +58,18 @@ class Broker {
         System.out.println("交钥匙");
     }
 }
-
+//<!-- 装配 Bean-->
+//<bean name="landlord" class="pojo.Landlord"/>
+//<bean id="broker" class="aspect.Broker"/>
+//
+//<!-- 配置AOP -->
+//<aop:config>
+//    <!-- where：在哪些地方（包.类.方法）做增加 -->
+//    <aop:pointcut id="landlordPoint"
+//                  expression="execution(* pojo.Landlord.service())"/>
+//    <!-- what:做什么增强 -->
+//    <aop:aspect id="logAspect" ref="broker">
+//        <!-- when:在什么时机（方法前/后/前后） -->
+//        <aop:around pointcut-ref="landlordPoint" method="around"/>
+//    </aop:aspect>
+//</aop:config>

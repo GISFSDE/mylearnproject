@@ -45,8 +45,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  *从请求参数中获取数据
  * localhost:8080/?name=Geoffroy
- * 请求参数是强制要求存在的。这意味着，如果导航至 localhost:8080，那
- * 么将会看到一个错误页面
+ * 请求参数是强制要求存在的。这意味着，如果导航至 localhost:8080，
+ * 那么将会看到一个错误页面
  */
 @Controller
 public class HelloController {
