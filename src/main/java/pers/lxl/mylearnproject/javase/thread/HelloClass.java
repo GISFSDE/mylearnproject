@@ -1,5 +1,6 @@
 package pers.lxl.mylearnproject.javase.thread;
-/*快速交替执行看起来像是同时执行
+
+ /**快速交替执行看起来像是同时执行
 * 进程和线程的关系：一个进程可以包含一个或多个线程，但至少会有一个线程
 *多进程模式（每个进程只有一个线程）
 *多线程模式（一个进程有多个线程）
@@ -14,43 +15,55 @@ package pers.lxl.mylearnproject.javase.thread;
 和单线程相比，多线程编程的特点在于：多线程经常需要读写共享数据，并且需要同步。例如，播放电影时，就必须由一个线程播放视频，另一个线程播放音频，两个线程需要协调运行，否则画面和声音就不同步。因此，多线程编程的复杂度高，调试更困难。
 Java多线程编程的特点又在于：
 多线程模型是Java程序最基本的并发模型；
-后续读写网络、数据库、Web开发等都依赖Java多线程模型。*/
+后续读写网络、数据库、Web开发等都依赖Java多线程模型。
+  @author lxl
+  **/
 public class HelloClass {
-    //当Java程序启动的时候，实际上是启动了一个JVM进程，然后，JVM启动主线程来执行main()方法。在main()方法中，我们又可以启动其他线程。
-    public static void main(String[] args) {
-        System.out.println("main start...");
-        //Thread thread = new Thread();//不能执行指定代码
-       // Thread thread = new MyThread();//extends Thread
-        Thread thread = new Thread(new MyRunnable());//implements Runnable
-        //Thread thread = new Thread(() -> {System.out.println("start new thread!"); });//Java8引入的lambda写法
-        thread.start();// 启动新线程，直接调用Thread实例的run()方法是无效的
-//        Thread.setPriority(int n) // 1~10, 默认值5
-        try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {}
-        System.out.println("main end...");
-    }
+
     //希望新线程能执行指定的代码，有以下几种方法：
 
-    //方法一：从Thread派生一个自定义类，然后覆写run()方法：
-    static class MyThread extends Thread{
+   /**方法一：从Thread派生一个自定义类，然后覆写run()方法，启动：子类对象.start(),为避免OOP单继承局限性，不建议使用*/
+    static class MyThread extends Thread {
         @Override
         public void run() {
             System.out.println("start new thread!extends Thread");
         }
     }
 
-   //方法二：创建Thread实例时，传入一个Runnable实例：
-   static class MyRunnable implements Runnable{
+    /**方法二：创建Thread实例时，传入一个Runnable实例：启动：传入目标对象+Thread对象.start()，建议使用:避免单继承局限性，灵活方便同一个对象被多个线程使用*/
+    static class MyRunnable implements Runnable {
 
-       @Override
-       public void run() {
-           System.out.println("start new thread!implements Runnable");
+        @Override
+        public void run() {
+            System.out.println("start new thread!implements Runnable");
 
-           try {
-               Thread.sleep(10);
-           } catch (InterruptedException e) {}
-           System.out.println("thread end.");
-       }
-   }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+            }
+            System.out.println("thread end.");
+        }
+    }
+     /**方法三：实现Callable接口（很少用）/
+
+    /**当Java程序启动的时候，实际上是启动了一个JVM进程，然后，JVM启动主线程来执行main()方法。在main()方法中，我们又可以启动其他线程。*/
+    public static void main(String[] args) {
+        //创建新线程
+        System.out.println("main start...");
+        //Thread thread = new Thread();//不能执行指定代码
+        // Thread thread = new MyThread();//extends Thread
+
+        //implements Runnable
+        Thread thread = new Thread(new MyRunnable());
+        //Thread thread = new Thread(() -> {System.out.println("start new thread!"); });//Java8引入的lambda写法
+        thread.start();// 启动新线程，直接调用Thread实例的run()方法是无效的，线程开启不一定立即执行，由CPU调度决定
+//        Thread.setPriority(int n) // 1~10, 默认值5
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+        }
+        System.out.println("main end...");
+    }
+
+
 }

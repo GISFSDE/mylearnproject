@@ -28,6 +28,7 @@ public class JsonL {
         Book book = mapper.readValue(input, Book.class);
         String json = mapper.writeValueAsString(book);
         ObjectMapper mapper1 = new ObjectMapper().registerModule(new JavaTimeModule());
+        System.out.println(json);
     }
 
 }
