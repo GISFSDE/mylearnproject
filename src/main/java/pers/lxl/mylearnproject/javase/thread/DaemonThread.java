@@ -1,5 +1,5 @@
 package pers.lxl.mylearnproject.javase.thread;
-/**守护线程
+/**守护线程（后台线程）
 Java程序入口就是由JVM启动main线程，main线程又可以启动其他线程。
 当所有线程都运行结束时，JVM退出，进程结束。
 如果有一个线程没有退出，JVM进程就不会退出。
@@ -15,5 +15,6 @@ public class DaemonThread {
         t.setDaemon(true);
         //守护线程不能持有任何需要关闭的资源，例如打开文件等，因为虚拟机退出时，守护线程没有任何机会来关闭文件，这会导致数据丢失。
         t.start();
+        System.out.println(t.isDaemon());
     }
 }
