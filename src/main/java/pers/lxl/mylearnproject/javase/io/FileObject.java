@@ -39,6 +39,7 @@ public class FileObject {
         System.out.println(catalog.listFiles());//目录下的文件和子目录名
         //listFiles()提供了一系列重载方法，可以过滤不想要的文件和目录
         File[] fs2 = catalog.listFiles(new FilenameFilter() { // 仅列出.exe文件
+            @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith(".exe"); // 返回true表示接受该文件
             }
