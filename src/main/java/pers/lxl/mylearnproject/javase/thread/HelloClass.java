@@ -60,6 +60,7 @@ public class HelloClass {
 //        Thread.setPriority(int n) // 1~10, 默认值5
         try {
             Thread.sleep(20);
+//            sleep() 可能会抛出 InterruptedException，因为异常不能跨线程传播回 main() 中，因此必须在本地进行处理。线程中抛出的其它异常也同样需要在本地进行处理。
         } catch (InterruptedException e) {
         }
         System.out.println("main end...");

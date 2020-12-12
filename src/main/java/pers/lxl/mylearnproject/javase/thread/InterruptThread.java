@@ -11,6 +11,7 @@ public class InterruptThread {
         t.start();
         Thread.sleep(100);
         //方法1----interrupt()方法仅仅向t线程发出了“中断请求”，至于t线程是否能立刻响应，要看具体代码。
+//        通过调用一个线程的 interrupt() 来中断该线程，如果该线程处于阻塞、限期等待或者无限期等待状态，那么就会抛出 InterruptedException，从而提前结束该线程。但是不能中断 I/O 阻塞和 synchronized 锁阻塞。
         t.interrupt();
         t.join();
         System.out.println("end");
@@ -40,6 +41,7 @@ class HelloThread extends Thread {
     @Override
     public void run() {
         int n = 0;
+//        判断线程状态
         while (!isInterrupted()) {
             n++;
             System.out.println(n + " hello!");
@@ -70,3 +72,7 @@ class HelloThread1 extends Thread {
         System.out.println("end!");
     }
 }
+//调用 Executor 的 shutdown() 方法会等待线程都执行完毕之后再关闭，
+// 但是如果调用的是 shutdownNow() 方法，则相当于调用每个线程的 interrupt() 方法
+// 如果只想中断 Executor 中的一个线程，可以通过使用 submit() 方法来提交一个线程，
+// 它会返回一个 Future<?> 对象，通过调用该对象的 cancel(true) 方法就可以中断线程。
