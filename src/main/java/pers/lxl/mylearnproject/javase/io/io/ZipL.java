@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.io;
+package pers.lxl.mylearnproject.javase.io.io;
 
 import java.io.*;
 import java.util.zip.ZipEntry;

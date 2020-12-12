@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.io;
+package pers.lxl.mylearnproject.javase.io.io;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

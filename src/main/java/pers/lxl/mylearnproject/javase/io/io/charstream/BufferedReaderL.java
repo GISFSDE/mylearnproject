@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.io;
+package pers.lxl.mylearnproject.javase.io.io.charstream;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,6 +23,7 @@ public class BufferedReaderL implements Runnable{
         File f = new File("fileTest.txt");
         // 创建文件字符流
         // 缓存流必须建立在一个存在的流的基础上
+//        装饰者模式
         try (
                 FileReader fr = new FileReader(f);
                 BufferedReader br = new BufferedReader(fr);

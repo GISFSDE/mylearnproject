@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.io;
+package pers.lxl.mylearnproject.javase.io.io;
 /*IO
 Input指从外部读入数据到内存，例如，把文件从磁盘读取到内存，从网络读取数据到内存等等。接口：（Reader字符流--》自动解码--》InputStream输入字节流（非文本只能用XXStream,文本Reader更加方便））
 因为内存有“易失性”的特点，所以必须把处理后的数据以某种方式输出，

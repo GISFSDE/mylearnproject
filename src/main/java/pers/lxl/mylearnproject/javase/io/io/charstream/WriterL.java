@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.io;
+package pers.lxl.mylearnproject.javase.io.io.charstream;
 
 import java.io.File;
 import java.io.FileWriter;
