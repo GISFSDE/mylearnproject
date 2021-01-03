@@ -5,14 +5,16 @@ import pers.lxl.mylearnproject.javase.oop.Student;
 import java.util.HashMap;
 import java.util.Map;
 
-//Map,（key-value）,快速查找，key不重,重覆盖值，需要正确覆写equals()，hashCode()方法
+/** Map,（key-value）,快速查找，key不重,重覆盖值，需要正确覆写equals()，hashCode()方法 */
 public class MapL {
     public static void main(String[] args) {
         Student s = new Student("Kaa", 12, 21);
         Map<String, Student> map = new HashMap<>();
         Map<String, Student> map2 = new HashMap<>();
-        map.put("Kaa", s);// 将"Kaa"和Student实例映射并关联,put相同的key会将value覆盖，key不能重复，value可以
-        Student target = map.get("Kaa");// 通过key查找并返回映射的Student实例
+        // 将"Kaa"和Student实例映射并关联,put相同的key会将value覆盖，key不能重复，value可以
+        map.put("Kaa", s);
+        // 通过key查找并返回映射的Student实例
+        Student target = map.get("Kaa");
         System.out.println(target == s);
         System.out.println(target.equals(s));
         System.out.println(target.getScore());
@@ -20,11 +22,14 @@ public class MapL {
         map1.put("apple", 122);
         map1.put("name", 121);
         map1.put("wdd", 143);
-        for (String key : map1.keySet()) {//iter+table快捷键
+        //iter+table快捷键
+        for (String key : map1.keySet()) {
             Integer value = map1.get(key);
-            System.out.println(value);//key会保证被遍历一次且仅遍历一次，但顺序完全没有保证
+            //key会保证被遍历一次且仅遍历一次，但顺序完全没有保证
+            System.out.println(value);
         }
-        for (Map.Entry<String, Integer> entry : map1.entrySet()) {//使用Map时，任何依赖顺序的逻辑都是不可靠的。
+        //使用Map时，任何依赖顺序的逻辑都是不可靠的。
+        for (Map.Entry<String, Integer> entry : map1.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
             System.out.println(key + "=" + value);

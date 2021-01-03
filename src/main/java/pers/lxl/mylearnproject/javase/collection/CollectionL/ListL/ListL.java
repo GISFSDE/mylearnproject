@@ -41,9 +41,12 @@ public class ListL {
         }
 //List<Integer> l = List.of(1,2,3);//Java9创建，传入null，会抛出NullPointerException
 //通过Iterator遍历List永远是最高效的方式
-//list，Array互转
+//-----list，Array互转-----
 //Integer[] array = list.toArray(new Integer[list.size()]);
 //List<Integer> list = List.of(array);
+
+
+
 //一种最常见的错误代码如下：
 //运行以上错误代码会报 ConcurrentModificationException 异常。这是因为当使用 foreach(for(Integer i : list)) 语句时，会自动生成一个iterator 来遍历该 list，但同时该 list 正在被 Iterator.remove() 修改。Java 一般不允许一个线程在遍历 Collection 时另一个线程修改它。
 //        for(Integer i : list){

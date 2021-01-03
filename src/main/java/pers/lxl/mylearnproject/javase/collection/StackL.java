@@ -1,5 +1,5 @@
 package pers.lxl.mylearnproject.javase.collection;
-/*（LIFO：Last In First Out）
+/**（LIFO：Last In First Out）
 把元素压栈：push(E)；
 把栈顶的元素“弹出”：pop(E)；
 取栈顶元素但不弹出：peek(E)。
