@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.collection;
+package pers.lxl.mylearnproject.javase.collection.CollectionL.SetL;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -11,9 +11,9 @@ public class SetL {
     public static void main(String[] args) {
         //HashSet是无序的，因为它实现了Set接口，并没有实现SortedSet接口；
         Set<String> set = new HashSet<>();
-//        HashSet 的⼦类，能够按照添加的顺序遍历
+//        HashSet 的⼦类，能够按照添加的顺序遍历，基于双向链表
         Set<String> set2 = new LinkedHashSet<>();
-        //TreeSet是有序的，因为它实现了SortedSet接口。
+        //TreeSet是有序的，因为它实现了SortedSet接口，基于红黑树。
         Set<String> set1 = new TreeSet<>();
         set.add("5");
         set.add("1");

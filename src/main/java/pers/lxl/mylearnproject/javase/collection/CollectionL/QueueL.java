@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.collection;
+package pers.lxl.mylearnproject.javase.collection.CollectionL;
 //Queue（FIFO：First In First Out）的有序表队列
 /*int size()：获取队列长度；
 boolean add(E)  /boolean offer(E)：添加元素到队尾；

@@ -3,7 +3,14 @@ package pers.lxl.mylearnproject.javase.javabase;
 import pers.lxl.mylearnproject.programbase.algorithm.Sort;
 
 import java.util.Arrays;
+/**存在继承的情况下，初始化顺序为：
 
+ 父类（静态变量、静态语句块）
+ 子类（静态变量、静态语句块）
+ 父类（实例变量、普通语句块）
+ 父类（构造函数）
+ 子类（实例变量、普通语句块）
+ 子类（构造函数）*/
 public class HelloWord {
     public static void main(String[] args) {
 //        【基础】-------------------------------

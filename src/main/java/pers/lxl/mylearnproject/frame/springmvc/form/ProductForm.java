@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.springmvc.form;
+package pers.lxl.mylearnproject.frame.springmvc.form;
 
 public class ProductForm {
     private String name;

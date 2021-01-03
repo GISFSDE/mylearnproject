@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.collection;
+package pers.lxl.mylearnproject.javase.collection.MapL;
 
 import pers.lxl.mylearnproject.javase.oop.Student;
 

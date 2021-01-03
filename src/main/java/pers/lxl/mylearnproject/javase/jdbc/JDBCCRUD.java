@@ -4,14 +4,22 @@ import org.junit.Test;
 
 import java.sql.*;
 
-/*JDBC（Java DataBase Connectivity）Java程序访问数据库的标准接口
+/**JDBC（Java DataBase Connectivity）Java程序访问数据库的标准接口
 * URL是由数据库厂商指定的格式，例如，MySQL的URL是：
 jdbcsprig:mysql://<hostname>:<port>/<db>?key1=value1&key2=value2
 假设数据库运行在本机localhost，端口使用标准的3306，数据库名称是learnjdbc，那么URL如下：
-jdbcsprig:mysql://localhost:3306/learnjdbc?useSSL=false&characterEncoding=utf8*/
+jdbcsprig:mysql://localhost:3306/learnjdbc?useSSL=false&characterEncoding=utf8
+
+
+ 步骤：1.获取链接
+ 2.通过Connection提供的createStatement()方法创建一个Statement对象，用于执行一个查询；
+ 3.执行Statement对象提供的executeQuery("SELECT * FROM students")并传入SQL语句，执行查询并获得返回的结果集，使用ResultSet来引用这个结果集；
+ 4.反复调用ResultSet的next()方法并读取每一行结果。
+ */
 public class JDBCCRUD {
     public static void main(String[] args) throws SQLException {
-        String JDBC_URL = "jdbcsprig:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";//?serverTimezone=GM解决TserverTimezone
+        //?serverTimezone=GM解决TserverTimezone
+        String JDBC_URL = "jdbcsprig:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";
         String JDBC_USER = "root";
         String JDBC_PASSWORD = "root";
 
@@ -50,11 +58,13 @@ public class JDBCCRUD {
 //            避免二：使用PreparedStatement。使用PreparedStatement可以完全避免SQL注入的问题，因为PreparedStatement始终使用?作为占位符，
 //            并且把数据连同SQL本身传给数据库，这样可以保证每次传给数据库的SQL语句是相同的，只是占位符的数据不同，还能高效利用数据库本身对查询的缓存。
         //--正确如下--CRUD：Create，Retrieve，Update和Delete
-        //次序---》获取连接--》创建Statement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果--》关闭连接（try后不用，自动关闭）
-        //prepareStatement次序---》获取连接--》创建prepareStatement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果
+
+        /**次序---》获取连接--》创建Statement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果--》关闭连接（try后不用，自动关闭）
+        prepareStatement次序---》获取连接--》创建prepareStatement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果 */
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
             try (PreparedStatement ps = conn.prepareStatement("SELECT id, grade, name, gender FROM students WHERE gender=? AND grade=?")) {
-                ps.setObject(1, "B"); // 注意：索引从1开始
+                // 注意：索引从1开始
+                ps.setObject(1, "B");
                 ps.setObject(2, 2);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
@@ -76,10 +86,12 @@ public class JDBCCRUD {
                     ps.setObject(2, 1);
                     ps.setObject(3, "LXL");
                     ps.setObject(4, 1);
-                    int n = ps.executeUpdate();//插入记录数量
+                    //插入记录数量
+                    int n = ps.executeUpdate();
                 try (ResultSet resultSet = ps.getGeneratedKeys()) {
                     if (resultSet.next()) {
-                        long id = resultSet.getLong(1);//索引从1开始
+                        //索引从1开始
+                        long id = resultSet.getLong(1);
                         System.out.println(id);
                         System.out.println(ps);
                         System.out.println(n);

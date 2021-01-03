@@ -5,7 +5,7 @@ package pers.lxl.mylearnproject.programbase.designpatterns.creationalpattern;
 抽象工厂：Abstract Factory
 建造者：Builder
 原型：Prototype
-单例：Singleton*/
+单例：SingletonOneThread*/
 /**定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method使一个类的实例化延迟到其子类。
  * 产品 （Product）【类】 将会对接口进行声明。 对于所有由创建者及其子类构建的对象， 这些接口都是通用的。
  * 抽象产品【抽象类，接口】

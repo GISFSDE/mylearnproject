@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.springmvc.domain;
+package pers.lxl.mylearnproject.frame.springmvc.domain;
 import java.io.Serializable;
 
 public class Product implements Serializable {

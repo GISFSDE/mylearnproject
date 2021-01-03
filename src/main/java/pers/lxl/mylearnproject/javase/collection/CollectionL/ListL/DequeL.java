@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.collection;
+package pers.lxl.mylearnproject.javase.collection.CollectionL.ListL;
 
 import java.util.Deque;
 import java.util.LinkedList;

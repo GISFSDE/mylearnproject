@@ -1,10 +1,9 @@
-package pers.lxl.mylearnproject.springmvc.controller;
+package pers.lxl.mylearnproject.frame.springmvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 //Spring Boot 来编写 MVC 应用的第一步通常是在代码中添加控制器。将控制器放到 controller 子包中，这样它就能够被@ComponentScan 注解所发现
 //@Controller
 //public class HelloController {
@@ -58,7 +57,7 @@ public class HelloController {
 //    }
     public String hello(@RequestParam(defaultValue = "world") String
                                 name, Model model) {
-        model.addAttribute("message", "Hello, " + name);
+        model.addAttribute("message", "Helloo, " + name);
         return "resultPage";
     }
 }
