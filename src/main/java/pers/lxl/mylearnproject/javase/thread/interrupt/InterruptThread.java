@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.thread;
+package pers.lxl.mylearnproject.javase.thread.interrupt;
 /**如果线程需要执行一个长时间任务，就可能需要能中断线程。
 中断线程就是其他线程给该线程发一个信号，该线程收到信号后结束执行run()方法，
 使得自身线程能立刻结束运行。
@@ -24,19 +24,7 @@ public class InterruptThread {
     }
 
 }
-class MyThread extends Thread{
-    @Override
-    public void run() {
-        Thread hello = new HelloThread();
-        hello.start(); // 启动hello线程
-        try {
-            hello.join(); // 等待hello线程结束
-        } catch (InterruptedException e) {
-            System.out.println("interrupted!");
-        }
-        hello.interrupt();
-    }
-}
+
 class HelloThread extends Thread {
     @Override
     public void run() {

@@ -1,4 +1,7 @@
-package pers.lxl.mylearnproject.javase.thread;
+package pers.lxl.mylearnproject.javase.thread.base;
+
+import pers.lxl.mylearnproject.javase.thread.interrupt.MyThread;
+
 /**守护线程（后台线程）
 Java程序入口就是由JVM启动main线程，main线程又可以启动其他线程。
 当所有线程都运行结束时，JVM退出，进程结束。

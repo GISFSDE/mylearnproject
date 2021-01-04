@@ -1,5 +1,7 @@
 package pers.lxl.mylearnproject.javase.thread;
 
+import pers.lxl.mylearnproject.javase.thread.interrupt.MyThread;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;

@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.thread;
+package pers.lxl.mylearnproject.javase.thread.lock;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.thread;
+package pers.lxl.mylearnproject.javase.thread.executor;
 /**定义任务**/
 public class LiftOff implements Runnable {
 

@@ -1,6 +1,10 @@
 package pers.lxl.mylearnproject.javase.thread;
 
- /**快速交替执行看起来像是同时执行
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+/**快速交替执行看起来像是同时执行
 * 进程和线程的关系：一个进程可以包含一个或多个线程，但至少会有一个线程
 *多进程模式（每个进程只有一个线程）
 *多线程模式（一个进程有多个线程）
@@ -44,19 +48,41 @@ public class HelloClass {
             System.out.println("thread end.");
         }
     }
-     /**方法三：实现Callable接口（很少用）/
+     /**方法三：实现Callable接口,与Runnable相比,Callable可以有返回值,返回值通过FutureTask进行封装（很少用）*/
+     static class MyCallable implements Callable<Integer> {
+         @Override
+         public Integer call() {
+             return 123;
+         }
+     }
+//相比之下,接口可以实现多个,而Thread只能单继承,
+// 继承整个Threa类开销过大,所以实现接口方式更好一些
+
 
     /**当Java程序启动的时候，实际上是启动了一个JVM进程，然后，JVM启动主线程来执行main()方法。在main()方法中，我们又可以启动其他线程。*/
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         //创建新线程
         System.out.println("main start...");
         //Thread thread = new Thread();//不能执行指定代码
-        // Thread thread = new MyThread();//extends Thread
 
-        //implements Runnable
+
+//extends Thread
+        // Thread thread = new MyThread();
+
+//implements Callable
+        MyCallable mc = new MyCallable();
+        FutureTask<Integer> ft = new FutureTask<>(mc);
+        Thread thread1 = new Thread(ft);
+        thread1.start();
+        System.out.println(ft.get());
+
+
+//implements Runnable
         Thread thread = new Thread(new MyRunnable());
         //Thread thread = new Thread(() -> {System.out.println("start new thread!"); });//Java8引入的lambda写法
         thread.start();// 启动新线程，直接调用Thread实例的run()方法是无效的，线程开启不一定立即执行，由CPU调度决定
+
+
 //        Thread.setPriority(int n) // 1~10, 默认值5
         try {
             Thread.sleep(20);

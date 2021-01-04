@@ -1,8 +1,5 @@
-package pers.lxl.mylearnproject.javase.thread;
+package pers.lxl.mylearnproject.javase.thread.state;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,9 +9,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**一个线程对象只能调用一次start()方法启动新线程，并在新线程中执行run()方法。
 一旦run()方法执行完毕，线程就结束了。因此，Java线程的状态有以下几种：
+
 New：新创建的线程，尚未执行；
+
 Runnable：正在 Java 虚拟机中运行。但是在操作系统层面，它可能处于运行状态，也可能等待资源调度（例如处理器资源），资源调度完成就进入运行状态。所以该状态的可运行是指可以被运行，具体有没有运行要看底层操作系统的资源调度。
+
 Blocked：请求获取 monitor lock 从而进入 synchronized 函数或者代码块，但是其它线程已经占用了该 monitor lock，所以出于阻塞状态。要结束该状态进入从而 RUNABLE 需要其他线程释放 monitor lock。
+
 Waiting：等待其它线程显式地唤醒。阻塞和等待的区别在于，阻塞是被动的，它是在等待获取 monitor lock。而等待是主动的，通过调用 Object.wait() 等方法进入。
                进入方法	                                         退出方法
  没有设置 Timeout 参数的 Object.wait() 方法	        Object.notify() / Object.notifyAll()
@@ -88,7 +89,11 @@ public class StateL {
         System.out.println("after");
     }
 
+/**    java.util.concurrent 类库中提供了 Condition 类来实现线程之间的协调，
+ 可以在 Condition 上调用 await() 方法使线程等待，其它线程调用 signal() 或 signalAll() 方法唤醒等待的线程。
+相比于 wait() 这种等待方式，await() 可以指定等待的条件，因此更加灵活。
 
+ 使用lock来获取一个Condition对象*/
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
 
@@ -105,9 +110,6 @@ public class StateL {
     public void after1() {
         lock.lock();
         try {
-//java.util.concurrent 类库中提供了 Condition 类来实现线程之间的协调，
-// 可以在 Condition 上调用 await() 方法使线程等待，其它线程调用 signal() 或 signalAll() 方法唤醒等待的线程。
-//相比于 wait() 这种等待方式，await() 可以指定等待的条件，因此更加灵活。
             condition.await();
             System.out.println("after1");
         } catch (InterruptedException e) {
