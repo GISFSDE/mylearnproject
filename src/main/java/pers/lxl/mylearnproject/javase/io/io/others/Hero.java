@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.io.io;
+package pers.lxl.mylearnproject.javase.io.io.others;
 
 import java.io.Serializable;
 /**序列化的类需要实现 Serializable 接口，它只是一个标准，没有任何方法需要实现，但是如果不去实现它的话而进行序列化，会抛出异常。

@@ -18,7 +18,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-/**    套接字 NIO 实例
+/**    套接字(Socket) NIO 实例
  * @author lxl*/
 public class NioServer {
 
@@ -48,15 +48,15 @@ public class NioServer {
         serverSocket.bind(address);
 
         while (true) {
-//3. 监听事件
-//            使用 select() 来监听到达的事件，它会一直阻塞直到有至少一个事件到达。
+//          3. 监听事件
+//使用 select() 来监听到达的事件，它会一直阻塞直到有至少一个事件到达。
             selector.select();
             Set<SelectionKey> keys = selector.selectedKeys();
             Iterator<SelectionKey> keyIterator = keys.iterator();
-//5. 事件循环
+//          5. 事件循环
 //因为一次 select() 调用不能处理完所有的事件，并且服务器端有可能需要一直监听事件，因此服务器端处理事件的代码一般会放在一个死循环内。
             while (keyIterator.hasNext()) {
-//4. 获取到达的事件
+//          4. 获取到达的事件
                 SelectionKey key = keyIterator.next();
 
                 if (key.isAcceptable()) {

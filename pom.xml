@@ -21,7 +21,22 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+        <!--json-->
+        <dependency>
 
+            <groupId>net.sf.json-lib</groupId>
+
+            <artifactId>json-lib</artifactId>
+
+            <version>2.4</version>
+
+            <classifier>jdk15</classifier>
+
+        </dependency>
         <!-- jedis  redis 驱动 -->
         <dependency>
             <groupId>redis.clients</groupId>
@@ -155,6 +170,15 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
         </dependency>
     </dependencies>
 

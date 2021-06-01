@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import static org.springframework.data.mongodb.core.aggregation.AggregationUpdate.update;
 import static org.springframework.data.relational.core.sql.StatementBuilder.delete;
 
-/*ACID特性：
+/**ACID特性：
 Atomicity：原子性
 Consistency：一致性
 Isolation：隔离性

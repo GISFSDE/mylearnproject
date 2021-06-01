@@ -11,7 +11,8 @@ jdbcsprig:mysql://<hostname>:<port>/<db>?key1=value1&key2=value2
 jdbcsprig:mysql://localhost:3306/learnjdbc?useSSL=false&characterEncoding=utf8
 
 
- 步骤：1.获取链接
+ 步骤：
+ 1.获取链接
  2.通过Connection提供的createStatement()方法创建一个Statement对象，用于执行一个查询；
  3.执行Statement对象提供的executeQuery("SELECT * FROM students")并传入SQL语句，执行查询并获得返回的结果集，使用ResultSet来引用这个结果集；
  4.反复调用ResultSet的next()方法并读取每一行结果。
@@ -53,14 +54,17 @@ public class JDBCCRUD {
         // conn.close();
 
 //        }
+
+
+
         //--SQL注入--   比如pass = " OR pass='"
 //            避免一：针对所有字符串参数进行转义，但是转义很麻烦，而且需要在任何使用SQL的地方增加转义代码
 //            避免二：使用PreparedStatement。使用PreparedStatement可以完全避免SQL注入的问题，因为PreparedStatement始终使用?作为占位符，
 //            并且把数据连同SQL本身传给数据库，这样可以保证每次传给数据库的SQL语句是相同的，只是占位符的数据不同，还能高效利用数据库本身对查询的缓存。
         //--正确如下--CRUD：Create，Retrieve，Update和Delete
-
-        /**次序---》获取连接--》创建Statement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果--》关闭连接（try后不用，自动关闭）
-        prepareStatement次序---》获取连接--》创建prepareStatement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果 */
+        /**原始次序---》获取连接--》创建Statement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果--》关闭连接（try后不用，自动关闭）
+        prepareStatement次序---》获取连接--》创建prepareStatement对象执行操作--》executeQuery传入sql语句，获取结果--》ResultSet的next()读取结果
+        查询*/
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
             try (PreparedStatement ps = conn.prepareStatement("SELECT id, grade, name, gender FROM students WHERE gender=? AND grade=?")) {
                 // 注意：索引从1开始
@@ -99,6 +103,14 @@ public class JDBCCRUD {
                 }
             }
         }
+        //--删除--
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            try (PreparedStatement ps = connection.prepareStatement("DELETE FROM students WHERE identity =?")) {
+                ps.setObject(1,999);
+                int n = ps.executeUpdate();//删除行数
+            }
+        }
+
             //--更新--
         try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
             try (PreparedStatement ps = connection.prepareStatement("UPDATE students SET name =? WHERE id =?")) {
@@ -107,13 +119,7 @@ public class JDBCCRUD {
                 int n = ps.executeUpdate();//返回更新行数
             }
         }
-            //--更新--
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
-            try (PreparedStatement ps = connection.prepareStatement("DELETE FROM students WHERE identity =?")) {
-                ps.setObject(1,999);
-                int n = ps.executeUpdate();//删除行数
-            }
-        }
+
 
     }
 

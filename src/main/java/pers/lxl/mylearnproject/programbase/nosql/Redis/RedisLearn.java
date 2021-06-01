@@ -7,11 +7,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+/**Redis学习
+ * 首先需手动启动Redis服务redis目录下开启 cmd： .\redis-server.exe redis.windows.conf
+ * 不关闭上一个再开启cmd： .\redis-cli.exe -h 127.0.0.1 -p 6379连接
+ * 数据类型：String，List，Set，ZSet（有序），Hash，*/
 public class RedisLearn {
     public static void main(String[] args) {
         Jedis jedis = new Jedis("localhost");
-
+        // 如果 Redis 服务设置来密码，需要下面这行，没有就不需要
+        // jedis.auth("123456");
+        System.out.println("连接成功");
+        //查看服务是否运行
+        System.out.println("服务正在运行: " + jedis.ping());
 //String(字符串)
         jedis.set("foo", "bar");
         String value = jedis.get("foo");
@@ -25,9 +32,9 @@ public class RedisLearn {
         jedis.lpush("tutorial-list", "Mysql");
         jedis.rpush("tutorial-list", "Memcached");
         // 输出列表数据
-        List<String> list = jedis.lrange("tutorial-list", 0 ,1000);
-        for(int i=0; i<list.size(); i++) {
-            System.out.println("Stored string in redis:: "+list.get(i));
+        List<String> list = jedis.lrange("tutorial-list", 0, 1000);
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("Stored string in redis:: " + list.get(i));
         }
 //Set(集合)
         // 将给定元素添加到集合
@@ -38,7 +45,8 @@ public class RedisLearn {
         // 检查给定元素是否存在于集合中
         System.out.println("a is exist in setTest ?" + jedis.sismember("setTest", "a"));
 
-        Set set = jedis.smembers("setTest"); // 返回集合包含的所有元素
+        // 返回集合包含的所有元素
+        Set set = jedis.smembers("setTest");
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());

@@ -5,7 +5,7 @@ public class Student {
     String gender;
     int grade;
     int score;
-    private int id;
+//    private int id;
 
     public String getName() {
         return name;
@@ -38,12 +38,12 @@ public class Student {
     public void setScore(int score) {
         this.score = score;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public int getId() {
+//        return id;
+//    }
 }

@@ -20,7 +20,8 @@ public class InputStreamL {
             if (n == -1) {
                 break;
             }
-            System.out.println(n); // 打印byte的值
+            // 打印byte的值
+            System.out.println(n);
         }
         inputStream.close(); // 关闭流释放对应的底层资源，便让操作系统把资源释放掉，否则，应用程序占用的资源会越来越多，不但白白占用内存，还会影响其他应用程序的运行。
 //        利用缓冲区一次读取多个字节
@@ -28,7 +29,8 @@ public class InputStreamL {
             // 定义1000个字节大小的缓冲区:
             byte[] buffer = new byte[1000];
             int n;
-            while ((n = input.read(buffer)) != -1) { // 读取到缓冲区,read()方法是阻塞的（Blocking），必须等待read()方法返回才能执行下一行代码
+            // 读取到缓冲区,read()方法是阻塞的（Blocking），必须等待read()方法返回才能执行下一行代码
+            while ((n = input.read(buffer)) != -1) {
                 System.out.println("read " + n + " bytes.");
             }
         }

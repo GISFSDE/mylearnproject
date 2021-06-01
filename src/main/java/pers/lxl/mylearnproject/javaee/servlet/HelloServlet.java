@@ -8,14 +8,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
-
+/*需熟悉常见方法，数据转送方式*/
 /**WebServlet注解表示这是一个Servlet，并映射到地址*/
 @WebServlet(urlPatterns = "/")
 public class HelloServlet extends HttpServlet {
 /**HttpServletRequest和HttpServletResponse两个对象，分别代表HTTP请求和响应*/
 
 /**GET 请求来自于一个 URL 的正常请求，或者来自于一个未指定 METHOD 的 HTML 表单，它由 doGet() 方法处理。
- * http://www.test.com/hello?key1=value1&key2=value2*/
+ * http://www.test.com/hello?key1=value1&key2=value2
+ * 哪些是get方式呢？
+ * form默认的提交方式
+ * 如果通过一个超链访问某个地址
+ * 如果在地址栏直接输入某个地址
+ * ajax指定使用get方式的时候*/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -33,7 +38,7 @@ public class HelloServlet extends HttpServlet {
         // 最后不要忘记flush强制输出:
         pw.flush();
     }
-
+/**声明周期：构造函数--》init--》service--》destory--》被回收*/
     public HelloServlet() {
         super();
     }
@@ -47,7 +52,10 @@ public class HelloServlet extends HttpServlet {
     protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doHead(req, resp);
     }
-/**POST 请求来自于一个特别指定了 METHOD 为 POST 的 HTML 表单，它由 doPost() 方法处理。*/
+/**POST 请求来自于一个特别指定了 METHOD 为 POST 的 HTML 表单，它由 doPost() 方法处理。
+ * 哪些是post方式呢？
+ * 在form上显示设置 method="post"的时候
+ * ajax指定post方式的时候*/
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);

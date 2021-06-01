@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-/*通过一个循环来执行每个PreparedStatement虽然可行，但是性能很低。SQL数据库对SQL语句相同，
+/**通过一个循环来执行每个PreparedStatement虽然可行，但是性能很低。SQL数据库对SQL语句相同，
 但只有参数不同的若干语句可以作为batch执行，即批量执行，这种操作有特别优化，速度远远快于循环执行每个SQL。*/
 public class JDBCBatch {
     public static void main(String[] args) throws SQLException {
@@ -16,16 +16,17 @@ public class JDBCBatch {
         students.setGender("1");
         students.setGrade(21);
         students.setName("Bof");
-        String JDBC_URL = "jdbcsprig:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";//?serverTimezone=GM解决TserverTimezone
+        //?serverTimezone=GM解决TserverTimezone
+        String JDBC_URL = "jdbcsprig:mysql://localhost:3306/learnjdbc?serverTimezone=GMT";
         String JDBC_USER = "root";
         String JDBC_PASSWORD = "root";
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
             try (PreparedStatement ps = conn.prepareStatement("INSERT INTO students(name,gender, grade, score)VALUES (?,?,?,?)")) {
 //                for (Student s : students) {
-//                    ps.setObject(1,s.name);
-//                    ps.setObject(2, s.gender);
-//                    ps.setObject(3, s.grade);
-//                    ps.setObject(4, s.score);
+//                    ps.setString(1,s.name);
+//                    ps.setString(2, s.gender);
+//                    ps.setInt(3, s.grade);
+//                    ps.setInt(4, s.score);
 //                    ps.addBatch();
 //                }
                 int[] ns=ps.executeBatch();
