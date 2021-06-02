@@ -1,6 +1,6 @@
 # mylearnproject
 A project about programming
-#包含以下类容
+#包含以下内容
 Java基础
 网络
 数据结构与算法
