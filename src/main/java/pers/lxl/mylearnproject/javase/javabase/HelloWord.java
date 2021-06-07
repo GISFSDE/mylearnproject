@@ -1,6 +1,6 @@
 package pers.lxl.mylearnproject.javase.javabase;
 
-import pers.lxl.mylearnproject.programbase.algorithm.Sort;
+import pers.lxl.mylearnproject.programbase.algorithm.sort.Sort;
 
 import java.util.Arrays;
 /**存在继承的情况下，初始化顺序为：
