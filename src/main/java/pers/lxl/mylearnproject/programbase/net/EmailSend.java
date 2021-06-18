@@ -6,19 +6,23 @@ package pers.lxl.mylearnproject.programbase.net;
 SMTP协议是一个建立在TCP之上的协议，任何程序发送邮件都必须遵守SMTP协议。使用Java程序发送邮件时，我们无需关心SMTP协议的底层原理，
 * 只需要使用JavaMail这个标准API就可以直接发送邮件。*/
 //MUA--》MTA--》MTA--》MDA《--MUA
+
 import javax.activation.DataHandler;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
 import java.io.IOException;
 import java.util.Properties;
-/*假设我们准备使用自己的邮件地址me@example.com给小明发送邮件，
-已知小明的邮件地址是xiaoming@somewhere.com，发送邮件前，我们首先要确定作为MTA的邮件服务器地址和端口号。邮件服务器地址通常是smtp.example.com，端口号由邮件服务商确定使用25、465还是587。以下是一些常用邮件服务商的SMTP信息：
-QQ邮箱：SMTP服务器是smtp.qq.com，端口是465/587；
-163邮箱：SMTP服务器是smtp.163.com，端口是465；
-Gmail邮箱：SMTP服务器是smtp.gmail.com，端口是465/587。
-有了SMTP服务器的域名和端口号，我们还需要SMTP服务器的登录信息，通常是使用自己的邮件地址作为用户名，登录口令是用户口令或者一个独立设置的SMTP口令。
-我们来看看如何使用JavaMail发送邮件。*/
+
+/**
+ * 假设我们准备使用自己的邮件地址me@example.com给小明发送邮件，
+ * 已知小明的邮件地址是xiaoming@somewhere.com，发送邮件前，我们首先要确定作为MTA的邮件服务器地址和端口号。邮件服务器地址通常是smtp.example.com，端口号由邮件服务商确定使用25、465还是587。以下是一些常用邮件服务商的SMTP信息：
+ * QQ邮箱：SMTP服务器是smtp.qq.com，端口是465/587；
+ * 163邮箱：SMTP服务器是smtp.163.com，端口是465；
+ * Gmail邮箱：SMTP服务器是smtp.gmail.com，端口是465/587。
+ * 有了SMTP服务器的域名和端口号，我们还需要SMTP服务器的登录信息，通常是使用自己的邮件地址作为用户名，登录口令是用户口令或者一个独立设置的SMTP口令。
+ * 我们来看看如何使用JavaMail发送邮件。
+ */
 public class EmailSend {
     public static void main(String[] args) throws MessagingException, IOException {
         //    1.准备SMTP登录信息
@@ -30,10 +34,14 @@ public class EmailSend {
         String password = " ";
         // 连接到SMTP服务器587端口:
         Properties props = new Properties();
-        props.put("mail.smtp.host", smtp); // SMTP主机名
-        props.put("mail.smtp.port", "587"); // 主机端口号
-        props.put("mail.smtp.auth", "true"); // 是否需要用户认证
-        props.put("mail.smtp.starttls.enable", "true"); // 启用TLS加密
+        // SMTP主机名
+        props.put("mail.smtp.host", smtp);
+        // 主机端口号
+        props.put("mail.smtp.port", "587");
+        // 是否需要用户认证
+        props.put("mail.smtp.auth", "true");
+        // 启用TLS加密
+        props.put("mail.smtp.starttls.enable", "true");
 // 获取Session实例:
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {

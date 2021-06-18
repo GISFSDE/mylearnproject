@@ -10,6 +10,8 @@
 //import net.sf.json.xml.XMLSerializer;
 //import pers.lxl.mylearnproject.javase.oop.Main;
 //import net.sf.json.JSONObject;
+//
+//import javax.servlet.http.HttpServletRequest;
 //import java.io.IOException;
 //import java.io.InputStream;
 //import java.util.HashMap;
@@ -41,6 +43,9 @@
 // （4）commons-collections类库是各种集合类和集合工具类的封装。*/
 //public class JsonL {
 //    public static void main(String[] args) throws IOException {
+//对象转MAP
+//Map<String, Object> param = JSONObject.parseObject(JSONObject.toJSONString(对象));
+
 //        InputStream input = Main.class.getResourceAsStream("/book.json");
 //        ObjectMapper mapper = new ObjectMapper();
 //        // 反序列化时忽略不存在的JavaBean属性:
@@ -101,11 +106,11 @@
 //     * 将json格式封装的字符串数据转换成java中的Map数据
 //     * @return
 //     */
-//    private Map<Object, Object> jsonToMap() {
+//    private Map<Object, Object> jsonToMap(HttpServletRequest req) {
 //
 //        String jsonStr = req.getParameter("User"); //以参数的形式接收前端传过来的数据
 //        Map<Object, Object> map = new HashMap<Object, Object>();
-//        JSONArray jsonArray = JSONArray.fromObject(jsonStr)；
+//        JSONArray jsonArray = JSONArray.fromObject(jsonStr);
 //        JSONObject jsonOne;
 //        for (int i=0;i<jsonArray.size();i++) {
 //            jsonOne = jsonArray.getJSONObject(i);

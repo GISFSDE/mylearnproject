@@ -22,6 +22,7 @@ public class Sort {
     }
 
     /**
+     * 快速排序
      * 从数列中挑出一个元素，称为 "基准"（pivot）;
      * 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；
      * 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；
@@ -61,6 +62,9 @@ public class Sort {
 
     }
 
+    /**
+     * 选择排序，选择最小的放前面
+     */
     public static void selectSort(int[] a) {
         int minIndex = 0;
         int temp = 0;
@@ -82,7 +86,9 @@ public class Sort {
         }
     }
 
-
+    /**
+     * 插入排序，依次将元素插入到合适的位置
+     */
     public static int[] insertSort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             for (int j = i; j > 0; j--) {
@@ -98,7 +104,9 @@ public class Sort {
         return arr;
     }
 
-
+    /**
+     * 希尔排序，选择增量，增量两端比较交换，然后增量逐渐缩小
+     */
     public static void shellSort(int[] arr) {
         int d = arr.length;
         while (true) {
@@ -135,6 +143,9 @@ public class Sort {
         }
     }
 
+    /**
+     * 归并排序，对半分别归并排序，两半一起排序并合并
+     */
     public static int[] mergeSort(int[] sourceArray) throws Exception {
         // 对 arr 进行拷贝，不改变参数内容
         int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
@@ -181,9 +192,7 @@ public class Sort {
      * 堆排序*/
 
     /**
-     * 创建堆，
-     *
-     * @param arr 待排序列
+     * 创建堆
      */
     private static void heapSort(int[] arr) {
         //1.创建堆
@@ -382,7 +391,7 @@ public class Sort {
     public static void main(String[] args) throws Exception {
         int[] arr = {1, 5, 9, 6, 4, 8, 2, 3};
 //        Sort.bubbleSort(arr);
-        Sort.quickSort(arr,0,arr.length-1);
+        Sort.quickSort(arr, 0, arr.length - 1);
 //        Sort.selectSort(arr);
 //        Sort.insertSort(arr);
 //        Sort.shellSort(arr);

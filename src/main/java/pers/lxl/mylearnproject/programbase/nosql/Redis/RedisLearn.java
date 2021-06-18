@@ -7,10 +7,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-/**Redis学习
+
+/**
+ * Redis学习
  * 首先需手动启动Redis服务redis目录下开启 cmd： .\redis-server.exe redis.windows.conf
  * 不关闭上一个再开启cmd： .\redis-cli.exe -h 127.0.0.1 -p 6379连接
- * 数据类型：String，List，Set，ZSet（有序），Hash，*/
+ * 数据类型：String，List，Set，ZSet（有序），Hash，
+ */
 public class RedisLearn {
     public static void main(String[] args) {
         Jedis jedis = new Jedis("localhost");
