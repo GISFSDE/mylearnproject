@@ -54,6 +54,6 @@ package pers.lxl.mylearnproject.programbase.designpatterns;
 在不同语言中的实现   提供流行编程语言的代码， 让读者更好地理解模式背后的思想。
 
  */
-
+//http://c.biancheng.net/view/8462.html  一句话全模式总结
 public class DesignPrinciple {
 }
