@@ -21,3 +21,21 @@ public class EnumerationL {
 enum Weekday{
     SUN,MON,TUE,WED,THU,FRI,SAT;
 }
+
+
+/*枚举类有三个实例，故调用三次构造方法*/
+enum AccountType
+{
+    SAVING, FIXED, CURRENT;
+    private AccountType()
+    {
+        System.out.println("It is a account type");
+    }
+}
+class EnumOne
+{
+    public static void main(String[]args)
+    {
+        System.out.println(AccountType.FIXED);
+    }
+}
