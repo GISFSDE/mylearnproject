@@ -133,6 +133,22 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+<!--        Springboot 单元测试
+包含
+- JUnit — The de-facto standard for unit testing Java applications.
+- Spring Test & Spring Boot Test — Utilities and integration test support for Spring Boot applications.
+- AssertJ — A fluent assertion library.
+- Hamcrest — A library of matcher objects (also known as constraints or predicates).
+- Mockito — A Java mocking framework.
+- JSONassert — An assertion library for JSON.
+- JsonPath — XPath for JSON.
+JUnit： 一个Java语言的单元测试框架
+Spring Test & Spring Boot Test：为Spring Boot应用提供集成测试和工具支持
+AssertJ：支持流式断言的Java测试框架
+Hamcrest：一个匹配器库
+Mockito：一个java mock框架
+JSONassert：一个针对JSON的断言库
+JsonPath：JSON XPath库-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -143,28 +159,6 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.5.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-engine</artifactId>
-            <version>1.5.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.5.2</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>

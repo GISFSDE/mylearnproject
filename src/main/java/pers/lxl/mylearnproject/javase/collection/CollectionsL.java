@@ -1,7 +1,22 @@
 package pers.lxl.mylearnproject.javase.collection;
-/*JDK提供的工具类，同样位于java.util包中。它提供了一系列静态方法，能更方便地操作各种集合。*/
+
+import pers.lxl.mylearnproject.javase.oop.Person;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+/**JDK提供的工具类，同样位于java.util包中。它提供了一系列静态方法，能更方便地操作各种集合。*/
+
 public class CollectionsL {
     public static void main(String[] args) {
+//遍历
+        Collection<Person> persons = new ArrayList<Person>();
+        Iterator iterator = persons.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
         //创建空集合
         //创建空List：List<T> emptyList()
         //创建空Map：Map<K, V> emptyMap()

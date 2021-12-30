@@ -4,20 +4,21 @@ import java.util.*;
 
 /**有序，0开始，元素可重复与null,同数组增删元素麻烦，所以有ArrayList
 ArrayList把添加和删除的操作封装起来，让我们操作List类似于操作数组，却不用关心内部元素如何移动。
-                      ArrayList	    LinkedList
+                      ArrayList	        LinkedList                     Vector
 获取指定元素	        速度很快	    需要从头开始查找元素
 添加元素到末尾	        速度很快	    速度很快
-在指定位置添加/删除	需要移动元素	不需要移动元素
+在指定位置添加/删除	    需要移动元素    不需要移动元素
 内存占用	            少	            较大
  * @author lxl*/
 public class ListL {
     public static void main(String[] args) {
         //    新建
-        //适合查改，线程不安，底层数组
+        //适合查改，线程不安，底层数组(动态扩容50%)。
+        // public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, java.io.Serializable
         List<Integer> list = new ArrayList<>();
         //适合增删，线程不安，底层双向链表（JDK1.6双向循环链表）
         List list1 = new LinkedList<>();
-//        底层数组，线程安全
+        //  底层数组，线程安全
         List list2 = new Vector();
         //增
         list.add(1);

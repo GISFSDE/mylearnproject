@@ -1,5 +1,5 @@
 package pers.lxl.mylearnproject.javase.collection;
-/*数组因为
+/**数组因为
  数组初始化后大小不可变；
  数组只能按索引顺序存取。
  所以需要其他的集合

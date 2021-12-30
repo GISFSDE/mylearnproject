@@ -3,14 +3,18 @@ package pers.lxl.mylearnproject.javase.collection.MapL;
 import pers.lxl.mylearnproject.javase.oop.Student;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 
 /** Map,（key-value）,快速查找，key不重,重覆盖值，需要正确覆写equals()，hashCode()方法 */
 public class MapL {
     public static void main(String[] args) {
         Student s = new Student("Kaa", 12, 21);
         Map<String, Student> map = new HashMap<>();
-        Map<String, Student> map2 = new HashMap<>();
+        Map<String, Student> map2 = new LinkedHashMap<>();
+        Map<String, Student> map3 = new ConcurrentHashMap<>();
         // 将"Kaa"和Student实例映射并关联,put相同的key会将value覆盖，key不能重复，value可以
         map.put("Kaa", s);
         // 通过key查找并返回映射的Student实例
