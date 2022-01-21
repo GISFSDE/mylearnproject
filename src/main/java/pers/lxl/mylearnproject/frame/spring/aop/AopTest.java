@@ -1,6 +1,6 @@
 package pers.lxl.mylearnproject.frame.spring.aop;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pers.lxl.mylearnproject.frame.spring.aop.service.ProductService;

@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.programbase.nosql.Redis;
+package pers.lxl.mylearnproject.programbase.nosql.redislearn;
 
 
 import redis.clients.jedis.Jedis;
@@ -95,7 +95,7 @@ public class RedisLearn {
             System.out.println(iterator2.next());
         }
         System.out.println("........");
-        //     根据分值的排序顺序，获取有序集合在给定位置范围内的所有元素
+        //根据分值的排序顺序，获取有序集合在给定位置范围内的所有元素
         Set zset1 = jedis.zrange("zsetTest", 0, -1);
         Iterator iterator3 = zset1.iterator();
         while (iterator3.hasNext()) {

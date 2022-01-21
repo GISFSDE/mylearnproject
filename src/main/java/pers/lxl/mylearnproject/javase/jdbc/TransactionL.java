@@ -4,7 +4,7 @@ package pers.lxl.mylearnproject.javase.jdbc;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static org.springframework.data.mongodb.core.aggregation.AggregationUpdate.update;
+//import static org.springframework.data.mongodb.core.aggregation.AggregationUpdate.update;
 import static org.springframework.data.relational.core.sql.StatementBuilder.delete;
 
 /**ACID特性：
