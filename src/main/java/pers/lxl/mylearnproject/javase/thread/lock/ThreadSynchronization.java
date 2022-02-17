@@ -3,7 +3,7 @@ package pers.lxl.mylearnproject.javase.thread.lock;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**                    -----synchronized-----
+/**     -----synchronized-----
  * 如果多个线程同时读写共享变量，会出现数据不一致的问题。
  * Java 提供了两种锁机制来控制多个线程对共享资源的互斥访问，
  * 第一个是 JVM 实现的 synchronized，而另一个是 JDK 实现的 ReentrantLock
@@ -59,6 +59,7 @@ public class ThreadSynchronization {
 // * CachedThreadPool：一个任务创建一个线程；创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程，但是在以前构造的线程可用时将重用它们。对于执行很多短期异步任务的程序而言，这些线程池通常可提高程序性能。
 // * FixedThreadPool：所有任务只能使用固定大小的线程；创建一个可重用固定线程数的线程池，以共享的无界队列方式来运行这些线程，超出的线程会在队列中等待。
 // * SingleThreadExecutor：相当于大小为 1 的 FixedThreadPool。创建一个使用单个 worker 线程的 Executor，以无界队列方式来运行该线程，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序 (FIFO, LIFO, 优先级) 执行。
+//       见阿里巴巴手册，不建议使用Executors创建线程池，容易导致OOM
         ExecutorService executorService = Executors.newCachedThreadPool();
 
         //同步代码块
