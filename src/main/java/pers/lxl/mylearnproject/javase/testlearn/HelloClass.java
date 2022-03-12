@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.test;
+package pers.lxl.mylearnproject.javase.testlearn;
 
 /*测试知识见测试目录*/
 public class HelloClass {

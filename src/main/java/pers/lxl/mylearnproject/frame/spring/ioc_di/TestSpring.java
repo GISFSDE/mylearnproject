@@ -1,4 +1,5 @@
 package pers.lxl.mylearnproject.frame.spring.ioc_di;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

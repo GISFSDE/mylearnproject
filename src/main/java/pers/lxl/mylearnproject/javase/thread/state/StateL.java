@@ -45,6 +45,7 @@ Terminated：线程已终止，因为run()方法执行完毕。
 线程正常终止：run()方法执行到return语句返回；
 线程意外终止：run()方法因为未捕获的异常导致线程终止；
 对某个线程的Thread实例调用stop()方法强制终止（强烈不推荐使用）。
+ https://www.processon.com/diagraming/62231a87f346fb0715fa40aa
 **/
 public class StateL {
     public static void main(String[] args) throws InterruptedException, IOException {

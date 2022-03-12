@@ -1,4 +1,4 @@
-package pers.lxl.mylearnproject.javase.test;
+package pers.lxl.mylearnproject.javase.testlearn;
 
 import org.junit.Test;
 import org.springframework.data.mongodb.core.mapping.TextScore;
