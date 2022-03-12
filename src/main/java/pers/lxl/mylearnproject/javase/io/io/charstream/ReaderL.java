@@ -4,6 +4,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 /**---字符操作----
+ * - InputStream是一个字节流，即以byte为单位读取，而Reader是一个字符流，即以char为单位读取
+ * -   InputStream			                                                   Reader
+ *   字节流，以byte为单位			                                         字符流，以char为单位
+ *   读取字节（-1，0~255）：int read()	                              读取字符（-1，0~65535）：int read()
+ *   读到字节数组：int read(byte[] b)	                               读到字符数组：int read(char[] c)
+ * - java.io.Reader是所有字符输入流的超类，它最主要的方法是：
+ *   public int read() throws IOException;
+ *   这个方法读取字符流的下一个字符，并返回字符表示的int，范围是0~65535。如果已读到末尾，返回-1。
  * @author lxl*/
 public class ReaderL {
         public static void main(String[] args) {

@@ -1,6 +1,5 @@
 package pers.lxl.mylearnproject.javase.jdbc;
 
-import org.junit.Test;
 
 import java.sql.*;
 
