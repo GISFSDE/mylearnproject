@@ -35,7 +35,7 @@ public class ListL {
         //查
         System.out.println("list1的值为" + list.get(1));
         Iterator it = list.iterator();
-        //hasNext（）判断是否还有下一个元素
+        //hasNext（）判断是否还有下一个元素，next（）获取下一个元素
         //Iterator 的特点是只能单向遍历，但是更加安全，因为它可以确保，在当前遍历的集合元素被更改的时候，就会抛出 ConcurrentModificationException 异常。
         while (it.hasNext()) {
             //next（）

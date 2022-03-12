@@ -49,4 +49,6 @@ public static void main(String args[]){
     private int operate(int a, int b, MathOperation mathOperation){
         return mathOperation.operation(a, b);
     }
+
+
 }
