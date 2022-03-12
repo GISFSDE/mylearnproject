@@ -1,9 +1,7 @@
 package pers.lxl.mylearnproject.javase.testlearn;
 
-import org.junit.Test;
-//import org.springframework.data.mongodb.core.mapping.TextScore;
 
-import static junit.framework.TestCase.assertEquals;
+
 
 /*单元测试就是针对最小的功能单元编写测试代码。Java程序最小的功能单元是方法，
 因此，对Java程序进行单元测试就是针对单个Java方法的测试。

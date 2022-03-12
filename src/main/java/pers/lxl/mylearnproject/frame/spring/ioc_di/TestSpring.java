@@ -1,8 +1,9 @@
 package pers.lxl.mylearnproject.frame.spring.ioc_di;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.annotations.Test;
+
 import pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.JuiceMaker;
 import pers.lxl.mylearnproject.frame.spring.ioc_di.pojo.Source;
 /*-----装配 Bean----
