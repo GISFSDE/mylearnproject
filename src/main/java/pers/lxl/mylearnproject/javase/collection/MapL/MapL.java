@@ -2,10 +2,7 @@ package pers.lxl.mylearnproject.javase.collection.MapL;
 
 import pers.lxl.mylearnproject.javase.oop.Student;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** Map,（key-value）,快速查找，key不重,重覆盖值，需要正确覆写equals()，hashCode()方法 */
@@ -17,11 +14,33 @@ public class MapL {
         Map<String, Student> map3 = new ConcurrentHashMap<>();
         // 将"Kaa"和Student实例映射并关联,put相同的key会将value覆盖，key不能重复，value可以
         map.put("Kaa", s);
+
         // 通过key查找并返回映射的Student实例
         Student target = map.get("Kaa");
         System.out.println(target == s);
         System.out.println(target.equals(s));
         System.out.println(target.getScore());
+
+
+//        HashMap、LinkedHashMap可存储多空键值对或单空键或值
+//        ConcurrentHashMap 不可空
+//        Map<String, Student> mapNull = new HashMap<>();
+//        Map<String, Student> mapNull = new LinkedHashMap<>();
+//        Map<String, Student> mapNull = new ConcurrentHashMap<>();
+        Map<String, Student> mapNull = new TreeMap<>();
+        mapNull.put("Kaa", null);
+        mapNull.put("Kaa1", null);
+//        mapNull.put(null,null);
+//        mapNull.put(null,null);
+//        mapNull.put(null,null);
+//        mapNull.put(null, s);
+        mapNull.put("1", s);
+
+
+        for (Map.Entry ss:mapNull.entrySet()
+             ) {
+            System.out.println("null test  :"+ss);
+        }
         Map<String, Integer> map1 = new HashMap<>();
         map1.put("apple", 122);
         map1.put("name", 121);

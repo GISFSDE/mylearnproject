@@ -15,19 +15,26 @@ public class ListL {
         //    新建
         //适合查改，线程不安，底层数组(动态扩容50%)。
         // public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, java.io.Serializable
-        List<Integer> list = new ArrayList<>();
+//        List<Integer> list = new ArrayList<>();
         //适合增删，线程不安，底层双向链表（JDK1.6双向循环链表）
-        List list1 = new LinkedList<>();
+        List list = new LinkedList<>();
         //  底层数组，线程安全
-        List list2 = new Vector();
+//        List list = new Vector();
         //增
         list.add(1);
         list.add(3);
+//        都可重复插入
+        list.add(2);
+        list.add(2);
         list.add(2);
         list.add(2);
         list.add(5);
         list.add(4);
         list.add(4);
+//        都可多空共存
+        list.add(null);
+        list.add(null);
+        list.add(null);
         //删
         list.remove(3);
         //改

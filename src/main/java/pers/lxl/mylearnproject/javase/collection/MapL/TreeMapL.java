@@ -31,12 +31,36 @@ public class TreeMapL {
         map.put(new Person("Bob"),2);
         map.put(new Person("Aob"),3);
         map.put(new Person("Gob"),4);
+
+
         for (Person key : map.keySet()) {
             //每个对象用此语句输出
             System.out.println(key);
         }
         System.out.println(map.get(new Person("Bob")));
+
+        //        多值可空
+//        Exception in thread "main" java.lang.NullPointerException
+//	at pers.lxl.mylearnproject.javase.collection.MapL.TreeMapL.lambda$main$0(TreeMapL.java:28)
+//	at java.util.Comparator.lambda$comparing$77a9974f$1(Comparator.java:469)
+//	at java.util.TreeMap.put(TreeMap.java:552)
+//	at pers.lxl.mylearnproject.javase.collection.MapL.TreeMapL.main(TreeMapL.java:34)
+
+        Map map1 = new TreeMap();
+//        map1.put(null,null);
+//        map1.put(null,"ww");
+        map1.put("ww",null);
+        map1.put("ww1",null);
+
+        for (Object m:map1.entrySet()
+             ) {
+            System.out.println(m);
+        }
+
+
     }
+
+
 }
     class Person{
         public String name;

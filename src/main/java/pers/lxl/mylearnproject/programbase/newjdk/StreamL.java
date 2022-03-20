@@ -39,7 +39,7 @@ public class StreamL {
         List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
 //      获取对应的平方数
         List<Integer> squaresList = numbers.stream().map( i -> i*i).distinct().collect(Collectors.toList());
-//      filter() 通过设置的条件过滤出元素
+//      filter() 通过设置的条件过滤出元素,结合lambda
 //      获取空字符串的数量
         long count = strings.stream().filter(string -> string.isEmpty()).count();
 //        并行（parallel）程序
@@ -58,6 +58,8 @@ public class StreamL {
         System.out.println("列表中最小的数 : " + stats.getMin());
         System.out.println("所有数之和 : " + stats.getSum());
         System.out.println("平均数 : " + stats.getAverage());
+
+
 
     }
 }

@@ -82,6 +82,7 @@ public class HelloClass {
 
 //implements Callable
         MyCallable mc = new MyCallable();
+//        FutureTask封装Callable 返回值
         FutureTask<Integer> ft = new FutureTask<>(mc);
         Thread thread1 = new Thread(ft);
         thread1.start();

@@ -20,9 +20,19 @@ public class SetL {
         set.add("2");
         set.add("1");
         set.add("a");
+//        多空单存
+        set.add(null);
+        set.add(null);
         set.add(null);
         set.add("4");
 
+//TreeSet默认元素不能为空，除非自定义Comparator
+//  Exception in thread "main" java.lang.NullPointerException
+//	at java.util.TreeMap.compare(TreeMap.java:1294)
+//	at java.util.TreeMap.put(TreeMap.java:538)
+//	at java.util.TreeSet.add(TreeSet.java:255)
+//	at pers.lxl.mylearnproject.javase.collection.CollectionL.SetL.SetL.main(SetL.java:27)
+//        set1.add(null);
         set1.add("1");
         set1.add("3");
         set1.add("2");
