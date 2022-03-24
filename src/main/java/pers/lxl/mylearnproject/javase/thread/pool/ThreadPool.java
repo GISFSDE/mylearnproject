@@ -1,5 +1,8 @@
-package pers.lxl.mylearnproject.javase.thread;
+package pers.lxl.mylearnproject.javase.thread.pool;
 import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 //自定义线程池
 public class ThreadPool {
 
@@ -60,5 +63,7 @@ public class ThreadPool {
             }
         }
     }
+
+
 
 }
