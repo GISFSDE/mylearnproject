@@ -1,8 +1,6 @@
-package pers.lxl.mylearnproject.javase.lambdal;
+package pers.lxl.mylearnproject.javase.newjdk.jdk8.lambdal;
 
-import org.aspectj.weaver.ast.Var;
 import org.junit.jupiter.api.Test;
-import pers.lxl.mylearnproject.javaee.servlet.SessionCookie.SignOutServlet;
 
 import java.util.function.*;
 
@@ -38,7 +36,7 @@ public class LambdaL<codeBlock> {
     @FunctionalInterface
     interface LambdaInterface {
         void doSomeThing(String s);
-//        Multiple non-overriding abstract methods found in interface pers.lxl.mylearnproject.javase.lambdal.LambdaL.LambdaInterface
+//        Multiple non-overriding abstract methods found in interface pers.lxl.mylearnproject.javase.newjdk.jdk8.lambdal.LambdaL.LambdaInterface
 //        void doSomeThing1(String s);
     }
 
