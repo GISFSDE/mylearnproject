@@ -1,15 +1,23 @@
 package pers.lxl.mylearnproject.javase.collection;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pers.lxl.mylearnproject.javase.oop.Person;
+import pers.lxl.mylearnproject.programbase.logs.LogsLearn;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
+import java.util.Collections;
 
-/**JDK提供的工具类，同样位于java.util包中。它提供了一系列静态方法，能更方便地操作各种集合。*/
+/**
+ * JDK提供的工具类，同样位于java.util包中。它提供了一系列静态方法，能更方便地操作各种集合。
+ */
 
 public class CollectionsL {
+    private static final Logger logger = LoggerFactory.getLogger(LogsLearn.class);
+
     public static void main(String[] args) {
+
 //遍历
         Collection<Person> persons = new ArrayList<Person>();
         Iterator iterator = persons.iterator();
@@ -17,6 +25,17 @@ public class CollectionsL {
             System.out.println(iterator.next());
         }
 
+
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(4);
+        list.add(3);
+        logger.error("list" + StringUtils.join(list.toArray(), ","));
+        Collections.reverse(list);
+        logger.error("Collections.reverse :" + StringUtils.join(list.toArray(), ","));
+        Collections.sort(list);
+        logger.error("Collections.sort :" + StringUtils.join(list.toArray(), ","));
         //创建空集合
         //创建空List：List<T> emptyList()
         //创建空Map：Map<K, V> emptyMap()

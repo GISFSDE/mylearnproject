@@ -24,6 +24,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
         <!--sl4fj  HikariCP引入了sl4fj，所以不用引入直接使用 -->
 <!--        <dependency>-->
 <!--            <groupId>org.slf4j</groupId>-->
@@ -180,6 +184,7 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
+<!--        数据库连接池-->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>

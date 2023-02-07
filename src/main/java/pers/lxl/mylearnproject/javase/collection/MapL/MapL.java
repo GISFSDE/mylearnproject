@@ -57,6 +57,9 @@ public class MapL {
             Integer value = entry.getValue();
             System.out.println(key + "=" + value);
         }
+        map1.forEach((key, value) -> {
+            System.out.println(key + ":" + value);
+        });
         //key是一个自己写的类,正确使用Map必须保证：
         //作为key的对象必须正确覆写equals()方法，相等的两个key实例调用equals()必须返回true；
         //作为key的对象还必须正确覆写hashCode()方法，且hashCode()方法要严格遵循以下规范：
