@@ -11,9 +11,11 @@
 
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+
     <groupId>pers.lxl</groupId>
     <artifactId>mylearnproject</artifactId>
-    <packaging>war</packaging><!--Java Web Application Archive-->
+    <packaging>pom</packaging><!--Java Web Application Archive-->
     <version>0.0.1-SNAPSHOT</version>
     <name>mylearnproject</name>
     <description>Demo project for Spring Boot</description>
@@ -21,9 +23,81 @@
     <properties>
         <java.version>1.8</java.version>
         <spring.version>5.2.8.RELEASE</spring.version>
+        <geotools.version>18.4</geotools.version>
+        <activiti.version>6.0.0</activiti.version>
     </properties>
-
+    <repositories>
+        <repository>
+            <id>osgeo</id>
+            <name>OSGeo Release Repository</name>
+            <url>https://repo.osgeo.org/repository/release/</url>
+            <snapshots><enabled>false</enabled></snapshots>
+            <releases><enabled>true</enabled></releases>
+        </repository>
+        <repository>
+            <id>osgeo-snapshot</id>
+            <name>OSGeo Snapshot Repository</name>
+            <url>https://repo.osgeo.org/repository/snapshot/</url>
+            <snapshots><enabled>true</enabled></snapshots>
+            <releases><enabled>false</enabled></releases>
+        </repository>
+    </repositories>
     <dependencies>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-rest-api</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <!--word模板导出-->
+        <dependency>
+            <groupId>com.deepoove</groupId>
+            <artifactId>poi-tl</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+        <!--xls-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <!--xlsx-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.4.7</version>
+        </dependency>
+
+        <!--GeoTools   repositories添加 repo.osgeo.org两个库-->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-shapefile</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geojson</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-extension</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>

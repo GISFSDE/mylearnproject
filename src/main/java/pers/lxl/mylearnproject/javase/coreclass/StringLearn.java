@@ -23,6 +23,8 @@ public class StringLearn {
         System.out.println(s1.replaceAll("[\\,\\;\\s]+", ","));
         String[] ss = s1.split("\\,");
         System.out.println(Arrays.toString(ss));
+        String real = s1.split("\\\\", -2)[0];
+        System.out.println(real);
         String[] ss2 = {"zce", "dwd", "wd"};
         String s = String.join("***", ss2);
         System.out.println(s);

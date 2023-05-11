@@ -1,13 +1,11 @@
 package pers.lxl.mylearnproject.programbase.newjdk;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -27,6 +25,7 @@ import java.util.stream.Stream;
  * 参考：
  * https://www.runoob.com/java/java8-streams.html
  * https://blog.csdn.net/QiuHaoqian/article/details/120942134
+ *
  * @author lxl
  */
 public class StreamL {
@@ -52,11 +51,6 @@ public class StreamL {
         Stream<Integer> streamIterate = Stream.iterate(0, n -> n + 2).limit(5);
 //        generate方法接受一个参数，方法参数类型为Supplier ，由它为流提供值。generate生成的流也是无限流，因此通过limit对流进行了截断。
         Stream<Double> streamGenerate = Stream.generate(Math::random).limit(5);
-
-
-
-
-
 
 
 //      =======操作流=========
@@ -104,6 +98,12 @@ public class StreamL {
         System.out.println("所有数之和 : " + stats.getSum());
         System.out.println("平均数 : " + stats.getAverage());
 
+//实际应用 map<String,BigDecimal>  求和
+        Map<String, BigDecimal> map = new HashMap<>();
+        map.put("a", new BigDecimal("1.5"));
+        map.put("b", new BigDecimal("2"));
+        map.put("c", new BigDecimal("2.5"));
+        map.values().stream().reduce(BigDecimal::add).get();
 
     }
 }
