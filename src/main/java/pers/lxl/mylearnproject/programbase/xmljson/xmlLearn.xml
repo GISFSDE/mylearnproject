@@ -1,15 +1,29 @@
-<?xml version="1.0"?>
-<!--ML是可扩展标记语言（eXtensible Markup Language）-->
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<book id="1" category="computer">
+    <name>Java核心技术</name>
+    <author>Cay S. Horstmann</author>
+<!--    <isbn lang="CN">1234567</isbn>-->
+    <isbn>1234567</isbn>
+    <tags>
+        <tag>Java</tag>
+        <tag>Network</tag>
+    </tags>
+    <pubDate/>
+</book>
+<!--XML是可扩展标记语言（Extensible Markup Language）-->
 <!--一是纯文本，默认使用UTF-8编码，二是可嵌套，适合表示结构化数据。-->
 <!--如果把XML内容存为文件，那么它就是一个XML文件，例如book.xml。-->
 <!--此外，XML内容经常通过网络作为消息传输。-->
 
 <!--直接把XML文件拖拽到浏览器窗口，如果格式错误，浏览器会报错-->
+<!--声明的是文档定义类型（DTD：Document Type Definition），DTD是可选的-->
 
-<!DOCTYPE note SYSTEM "book.dtd"><!--声明的是文档定义类型（DTD：Document Type Definition），DTD是可选的&ndash;&gt;-->
       <!--  字符	表示
              <	    &lt;
              >	    &gt;
              &	    &amp;
              "	    &quot;
-             '	    &apos;--><note></note>
+             '	    &apos;-->
+<!--<!DOCTYPE note SYSTEM "book.dtd">-->
+
