@@ -6,8 +6,6 @@ import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.cmd.CompleteTaskCmd;
-import org.activiti.engine.impl.cmd.DeleteTaskCmd;
 import org.activiti.engine.impl.cmd.NeedsActiveTaskCmd;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.history.HistoryManager;
@@ -26,15 +24,11 @@ import org.activiti.engine.task.Attachment;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
-import org.activiti.image.impl.DefaultProcessDiagramCanvas;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
-import org.activiti.spring.SpringProcessEngineConfiguration;
-import org.activiti.spring.boot.ProcessEngineConfigurationConfigurer;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -124,15 +118,17 @@ class ActivitylearnApplicationTests {
 
     /**
      * 1. 部署流程 repositoryService
-     * 部署之后就可以在act_re_procdef表中看到对相应的流程信息
+     * 部署之后就可以在act_re_procdef和act_re_deployment表中看到部署的流程信息
      */
     @Test
     public void deployProcess() {
         DeploymentBuilder builder = repositoryService.createDeployment();
         // bpmn文件的名称
-        builder.addClasspathResource("processes/test.bpmn");
-        // 设置key
-        builder.key("myProcess_3");
+//        builder.addClasspathResource("processes/test.bpmn");
+//        Assignee为当前任务处理人，可流程图写死，也可通过${变量名}绑定Assignee动态指定
+        builder.addClasspathResource("processes/activiti6test.bpmn20.xml");
+        // 设置key，为总流程的ID
+        builder.key("LeaveProcess");
         // 设定名称，也可以在图中定义
         builder.name("请假流程");
         // 进行布署
@@ -154,7 +150,8 @@ class ActivitylearnApplicationTests {
         // act_ru_variable 表中存储运行时变量
         Map<String, Object> variables = new HashMap<String, Object>();
         variables.put("submitter", "zs");//请假人张三
-        variables.put("leader", "ll");//老师老李
+
+
         try {
             // 引擎自动操作如下：
             //act_ru_execution 表 START_USER_ID字段 插入用户id
@@ -166,7 +163,7 @@ class ActivitylearnApplicationTests {
 
         // 流程的名称，也可以使用ByID来启动流程
         // key为流程图的ID,创建新的流程实例在 act_ru_execution 中
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myProcess_3", variables);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("LeaveProcess", variables);
 //        act_hi_actinst 增加历史动作
 //        act_hi_varinst 增加历史变量
         log.info("流程启动成功，act_ru_execution中流程实例id:{}，act_re_procdef中流程定义id:{}"
@@ -179,7 +176,8 @@ class ActivitylearnApplicationTests {
     @Test
     public void queryTask() {
         //  根据assignee(代理人)查询代理人待办的任务
-        String assignee = "admin";
+        String assignee = "zs";
+//        String assignee = "ll";
         // 老李待办
         List<Task> tasks = taskService.createTaskQuery()//创建任务查询对象
                 .taskAssignee(assignee)//指定个人任务查询，指定办理人
@@ -212,18 +210,25 @@ class ActivitylearnApplicationTests {
         }
     }
 
+    @Test
+    void getNextTask() {
+        Task nextTask = taskService.createTaskQuery().singleResult();
+        log.info("下一个任务的任务名：{},任务ID:{},创建时间：{}", nextTask.getName(), nextTask.getId(), nextTask.getCreateTime());
+    }
 
     /**
-     * 4. 完成流程 taskService，admin通过审核，老师同意
+     * 4. 完成两个任务 taskService，zs请假，ll审批
      */
     @Test
     public void completeTasks() {
+        String taskId = "200007"; // 当前任务id，act_ru_task表中ID；
         try {
             //添加批注
-            Authentication.setAuthenticatedUserId("zs");//批注人的名称  一定要写，不然查看的时候不知道人物信息
-            String taskId = "80007"; // 任务id；
+            Authentication.setAuthenticatedUserId("ll");//批注人的名称  一定要写，不然查看的时候不知道人物信息
+
             Task taskOne = taskService.createTaskQuery().taskId(taskId).singleResult();
             String processInstanceId = taskOne.getProcessInstanceId(); // 实例id
+            log.info("任务实例ID:{}", processInstanceId);
             String type = "comment"; // 批注类型,这个参数如果不写默认就是"comment"，用于扩展 用的。
             String message = "同意请假"; // 批注内容
             // 给当前任务添加批注信息
@@ -240,11 +245,13 @@ class ActivitylearnApplicationTests {
         }
 
         //创建附件
+        Task taskOne = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String processInstanceId = taskOne.getProcessInstanceId(); // 实例id
+        log.info("任务实例ID:{}", processInstanceId);
         try {
-            Authentication.setAuthenticatedUserId("zs");//批注人的名称  一定要写，不然查看的时候不知道人物信息
+            Authentication.setAuthenticatedUserId("ll");//批注人的名称  一定要写，不然查看的时候不知道人物信息
+//            Authentication.setAuthenticatedUserId("ll");//批注人的名称  一定要写，不然查看的时候不知道人物信息
             String attachmentType = "";
-            String taskId = "80007"; // 任务id
-            String processInstanceId = "80001"; // 任务实例id
             String attachmentName = "test.png"; // 附件名称
             String attachmentDescription = "描述描述"; // 附件描述
             String url = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png";
@@ -254,15 +261,18 @@ class ActivitylearnApplicationTests {
         }
         //获取附件
         // 根据流程实例ID查询附件
-        List<Attachment> processInstanceAttachments = taskService.getProcessInstanceAttachments("80001");
+        List<Attachment> processInstanceAttachments = taskService.getProcessInstanceAttachments(processInstanceId);
         // 根据任务ID查询附件
-        List<Attachment> attachments = taskService.getTaskAttachments("80007");
+        List<Attachment> attachments = taskService.getTaskAttachments(taskId);
 
         // 审批后，任务列表数据减少
         Map<String, Object> vars = new HashMap<>();
-        //  按配置的任务id填写，_5是老师审批id
+        //1.学生zs完成申请并指定下一任务处理人老师老李
+//        vars.put("_3", "true");
+//        vars.put("leader", "ll");
+        //  2.老师ll完成审批
         vars.put("_5", "true");
-        taskService.complete("80007", vars);
+        taskService.complete(taskId, vars);
         //审批不通过，结束流程
         //    runtimeService.deleteProcessInstance(vacationAudit.getProcessInstanceId(), auditId);
 
@@ -273,38 +283,49 @@ class ActivitylearnApplicationTests {
      **/
     @Test
     public void getFlowPic() throws IOException {
-//        默认生成流图
+//        生成默认流图(无颜色强调)
+//       方法一
 //        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
-//                .processDefinitionKey("myProcess_2")
+//                .processDefinitionId("LeaveProcess:2:190005")
 //                .singleResult();
 //        String diagramResourceName = processDefinition.getDiagramResourceName();
 //        InputStream imageStream = repositoryService.getResourceAsStream(
 //                processDefinition.getDeploymentId(), diagramResourceName);
-//
 //        getinputPic(imageStream);
 
+//      方法二
+//        String processDefinitionId = "LeaveProcess:2:190005";
+//        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
+//        DefaultProcessDiagramGenerator diagramGenerator = new DefaultProcessDiagramGenerator();
+//        //绘制bpmnModel代表的流程的流程图
+//        InputStream inputStream = diagramGenerator.generateDiagram(bpmnModel, "png", new ArrayList<String>());
+//        getinputPic(inputStream);
 
-//        自定义图片
-//        repositoryService.createDeployment()
-//                .key("myProcess_3")
-//                .name("请假流程")
+
+
+//      自定义图片,自定义高亮节点和连接线
+        repositoryService.createDeployment()
+                .key("LeaveProcess")
+                .name("请假流程")
 //                .addClasspathResource("processes/test.bpmn")
-//                .addClasspathResource("processes/test.png")
-//                .deploy();
+                .addClasspathResource("processes/activiti6test.bpmn20.xml")
+                .addClasspathResource("processes/test.png")
+                .deploy();
 //        接下来，可以通过API来获取流程定义图片资源：
         ProcessDefinition processDefinitionCustom = repositoryService.createProcessDefinitionQuery()
-                .processDefinitionKey("myProcess_3")
+//                .processDefinitionKey("myProcess_3")
+                .processDefinitionId("LeaveProcess:2:190005")
                 .singleResult();
 
 
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionCustom.getId());// 模型
-        List<String> highLightedActivities= new ArrayList<>();
+        List<String> highLightedActivities = new ArrayList<>();
 //       highLightedActivities  = runtimeService.getActiveActivityIds("80001");// 高亮指定节点
         List<String> highLightedFlows = new ArrayList<>(); // 需要高亮的连接线
 
 //        高亮处理过的连接线
         List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery()
-                .processInstanceId("80001")
+                .processInstanceId("192501")
                 .orderByHistoricActivityInstanceId().asc().list();
         highLightedFlows = getHighLightedFlows(bpmnModel, historicActivityInstances);// 获取处理过的连接线
 
@@ -315,28 +336,25 @@ class ActivitylearnApplicationTests {
         }
 
 
-
-
 //        ProcessDiagramGenerator processDiagramGenerator = new DefaultProcessDiagramGenerator();
 //        修改源码修改流程图颜色
         ProcessDiagramGenerator processDiagramGenerator = new LakerProcessDiagramGenerator();
         InputStream png = processDiagramGenerator.generateDiagram
-                (bpmnModel, "png",highLightedActivities,
+                (bpmnModel, "png", highLightedActivities,
                         highLightedFlows, "宋体", "微软雅黑", "黑体", null, 2.0);
-
-
 
 
         getinputPic(png);
 
     }
-        /**
-         * 获取已经流转的线
-         *
-         * @param bpmnModel
-         * @param historicActivityInstances
-         * @return
-         */
+
+    /**
+     * 获取已经流转的线
+     *
+     * @param bpmnModel
+     * @param historicActivityInstances
+     * @return
+     */
     private static List<String> getHighLightedFlows(BpmnModel bpmnModel, List<HistoricActivityInstance> historicActivityInstances) {
         // 高亮流程已发生流转的线id集合
         List<String> highLightedFlowIds = new ArrayList<>();
@@ -406,7 +424,7 @@ class ActivitylearnApplicationTests {
         return highLightedFlowIds;
     }
 
-   public void getinputPic(InputStream imageStream) throws IOException {
+    public void getinputPic(InputStream imageStream) throws IOException {
         FileOutputStream fos = new FileOutputStream("C:\\Users\\Dcjczx\\Desktop\\b.png");
         byte[] b = new byte[1024];
         while ((imageStream.read(b)) != -1) {
@@ -426,13 +444,13 @@ class ActivitylearnApplicationTests {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         List<HistoricTaskInstance> list = historyService.createHistoricTaskInstanceQuery() // 创建历史任务实例查询
-                .taskAssignee("admin") // 指定办理人
+                .taskAssignee("zs") // 指定办理人
 //                .finished() // 查询已经完成的任务
                 .list();
         for (HistoricTaskInstance hti : list) {
             log.info("任务ID:" + hti.getId());
             log.info("流程实例ID:" + hti.getProcessInstanceId());
-            log.info("班里人：" + hti.getAssignee());
+            log.info("办理人：" + hti.getAssignee());
             log.info("创建时间：" + sdf.format(hti.getCreateTime()));
             log.info("结束时间：" + sdf.format(hti.getEndTime()));
             log.info("===========================");
@@ -447,7 +465,7 @@ class ActivitylearnApplicationTests {
     public void historyActInstanceList() {
         List<HistoricActivityInstance> list = historyService // 历史任务Service
                 .createHistoricActivityInstanceQuery() // 创建历史活动实例查询
-                .processInstanceId("32501") // 指定流程实例id
+                .processInstanceId("125001") // 指定流程实例id
 //                .finished() // 查询已经完成的任务
                 .list();
         for (HistoricActivityInstance hai : list) {
@@ -637,10 +655,11 @@ class ActivitylearnApplicationTests {
     /**
      * 查询流程状态（正在执行 or 已经执行结束）
      */
+    @Test
     public void processState() {
         ProcessInstance pi = processEngine.getRuntimeService() // 获取运行时Service
                 .createProcessInstanceQuery() // 创建流程实例查询
-                .processInstanceId("2501") // 用流程实例id查询
+                .processInstanceId("160001") // 用流程实例id查询
                 .singleResult();
         if (pi != null) {
             System.out.println("流程正在执行！");
