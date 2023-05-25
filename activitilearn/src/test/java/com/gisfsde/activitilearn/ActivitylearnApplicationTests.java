@@ -24,7 +24,6 @@ import org.activiti.engine.task.Attachment;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
-import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -216,12 +215,28 @@ class ActivitylearnApplicationTests {
         log.info("下一个任务的任务名：{},任务ID:{},创建时间：{}", nextTask.getName(), nextTask.getId(), nextTask.getCreateTime());
     }
 
+@Test
+    void completeTask(){
+    // 审批后，任务列表数据减少
+        Map<String, Object> applyVars = new HashMap<>();
+    //1.学生zs完成申请并指定下一任务处理人老师老李
+    applyVars.put("_3", "true");
+    applyVars.put("leader", "ll");
+    completeTasks("232506", "申请请假", applyVars);
+    //  2.老师ll完成审批
+    Map<String, Object> teacherCheckVars = new HashMap<>();
+    teacherCheckVars.put("_5", "true");
+    completeTasks("232506", "申请请假", applyVars);
+    }
+
     /**
      * 4. 完成两个任务 taskService，zs请假，ll审批
+     * @param taskId 当前任务id，act_ru_task表中ID
+     * @param message 批注内容
+     * @param vars 流程中变量
      */
     @Test
-    public void completeTasks() {
-        String taskId = "200007"; // 当前任务id，act_ru_task表中ID；
+    public void completeTasks(String taskId,String message,Map<String, Object> vars) {
         try {
             //添加批注
             Authentication.setAuthenticatedUserId("ll");//批注人的名称  一定要写，不然查看的时候不知道人物信息
@@ -230,7 +245,6 @@ class ActivitylearnApplicationTests {
             String processInstanceId = taskOne.getProcessInstanceId(); // 实例id
             log.info("任务实例ID:{}", processInstanceId);
             String type = "comment"; // 批注类型,这个参数如果不写默认就是"comment"，用于扩展 用的。
-            String message = "同意请假"; // 批注内容
             // 给当前任务添加批注信息
             taskService.addComment(taskId, processInstanceId, type, message);
 
@@ -249,8 +263,8 @@ class ActivitylearnApplicationTests {
         String processInstanceId = taskOne.getProcessInstanceId(); // 实例id
         log.info("任务实例ID:{}", processInstanceId);
         try {
+//            Authentication.setAuthenticatedUserId("zs");//批注人的名称  一定要写，不然查看的时候不知道人物信息
             Authentication.setAuthenticatedUserId("ll");//批注人的名称  一定要写，不然查看的时候不知道人物信息
-//            Authentication.setAuthenticatedUserId("ll");//批注人的名称  一定要写，不然查看的时候不知道人物信息
             String attachmentType = "";
             String attachmentName = "test.png"; // 附件名称
             String attachmentDescription = "描述描述"; // 附件描述
@@ -265,13 +279,7 @@ class ActivitylearnApplicationTests {
         // 根据任务ID查询附件
         List<Attachment> attachments = taskService.getTaskAttachments(taskId);
 
-        // 审批后，任务列表数据减少
-        Map<String, Object> vars = new HashMap<>();
-        //1.学生zs完成申请并指定下一任务处理人老师老李
-//        vars.put("_3", "true");
-//        vars.put("leader", "ll");
-        //  2.老师ll完成审批
-        vars.put("_5", "true");
+
         taskService.complete(taskId, vars);
         //审批不通过，结束流程
         //    runtimeService.deleteProcessInstance(vacationAudit.getProcessInstanceId(), auditId);
@@ -314,7 +322,7 @@ class ActivitylearnApplicationTests {
 //        接下来，可以通过API来获取流程定义图片资源：
         ProcessDefinition processDefinitionCustom = repositoryService.createProcessDefinitionQuery()
 //                .processDefinitionKey("myProcess_3")
-                .processDefinitionId("LeaveProcess:2:190005")
+                .processDefinitionId("LeaveProcess:8:215004")
                 .singleResult();
 
 
@@ -325,7 +333,7 @@ class ActivitylearnApplicationTests {
 
 //        高亮处理过的连接线
         List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery()
-                .processInstanceId("192501")
+                .processInstanceId("217501")
                 .orderByHistoricActivityInstanceId().asc().list();
         highLightedFlows = getHighLightedFlows(bpmnModel, historicActivityInstances);// 获取处理过的连接线
 
@@ -444,12 +452,13 @@ class ActivitylearnApplicationTests {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         List<HistoricTaskInstance> list = historyService.createHistoricTaskInstanceQuery() // 创建历史任务实例查询
-                .taskAssignee("zs") // 指定办理人
-//                .finished() // 查询已经完成的任务
+//                .taskAssignee("zs") // 指定办理人
+                .finished() // 查询已经完成的任务
                 .list();
         for (HistoricTaskInstance hti : list) {
             log.info("任务ID:" + hti.getId());
             log.info("流程实例ID:" + hti.getProcessInstanceId());
+            log.info("流程Name:" + hti.getName());
             log.info("办理人：" + hti.getAssignee());
             log.info("创建时间：" + sdf.format(hti.getCreateTime()));
             log.info("结束时间：" + sdf.format(hti.getEndTime()));
@@ -458,15 +467,15 @@ class ActivitylearnApplicationTests {
     }
 
     /**
-     * 历史活动查询
+     * 历史活动查询,包含开始结束活动
      * 指定流程实例id,启动流程时，获取的实例ID
      */
     @Test
     public void historyActInstanceList() {
         List<HistoricActivityInstance> list = historyService // 历史任务Service
                 .createHistoricActivityInstanceQuery() // 创建历史活动实例查询
-                .processInstanceId("125001") // 指定流程实例id
-//                .finished() // 查询已经完成的任务
+//                .processInstanceId("125001") // 指定流程实例id
+                .finished() // 查询已经完成的任务
                 .list();
         for (HistoricActivityInstance hai : list) {
             log.info("任务ID:" + hai.getId());
@@ -487,9 +496,9 @@ class ActivitylearnApplicationTests {
     public void historyProcessInstanceList() {
         List<HistoricProcessInstance> list = historyService // 历史任务Service
                 .createHistoricProcessInstanceQuery()// 创建历史流程实例查询
-//                .finished()
+                .finished().list();
 //                .involvedUser("zs")  //与zs相关的
-                .startedBy("zs").list(); //由张三创建的
+//                .startedBy("zs").list(); //由张三创建的
         for (HistoricProcessInstance hai : list) {
             log.info("任务ID:" + hai.getId());
             log.info("流程实例ID:" + hai.getProcessDefinitionId());
@@ -671,6 +680,7 @@ class ActivitylearnApplicationTests {
     /**
      * 获得第一个节点.
      */
+    @Test
     public FlowNode findFirstActivity(String processDefinitionId) {
         Process process = ProcessDefinitionUtil.getProcess(processDefinitionId);
         FlowElement flowElement = process.getInitialFlowElement();
