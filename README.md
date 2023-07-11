@@ -4,30 +4,43 @@
 ## TODO
 
 ## 后端
+### JAVA基础
+
++ [ ] 面向对象
++ [ ] JDK新特性
++ [ ] 操作符
++ [ ] 流程控制
++ [ ] 初始化与清理
++ [ ] 权限控制
++ [ ] 复用类
++ [ ] 多态
++ [ ] 接口
++ [ ] 内部类
++ [ ] 容器及其工具比如stream
++ [ ] 异常
++ [ ] 字符串
++ [ ] 正则表达式
++ [ ] 反射
++ [ ] 泛型
++ [ ] 数组
++ [ ] IO
++ [ ] 枚举
++ [ ] 注解
++ [ ] 并发
++ [ ] c/s
++ [ ] 类型转换
 
 - ### 开发语言
 
 - [ ] JAVA+JVM
-
 - [ ] Python
-
-- [ ] 
-
-  
-
 - ### 后端框架
-
-- [ ] JDBC
-- [ ] Spring
-
-- [ ] SpringMVC
-
-- [ ] MyBatis
++ [ ] [Spring](Spring.md)
++ [ ] [SpringMVC](SpringMVC.md)
++ [ ] [MyBatis](MyBatis.md)
++ [ ] [SpringBoot](SpringBoot.md)
++ [ ] [SpringCloud](SpringCloud.md)
 - [ ] MyBatis-Plus
-
-- [ ] SpringBoot
-
-- [ ] SpringCloud
 
 - ### 中间件
 
@@ -66,33 +79,30 @@
 - [ ] 代码优雅规范
 - [ ] 实际业务范例
 - [ ] 
+### 项目组件
 
-## 前端
++ [ ] CRUD
++ [ ] 加解密
++ [ ] OFFICE解析、文件处理
++ [ ] JWT
++ [ ] 网络请求
++ [ ] 工作流
++ [ ] 缓存
++ [ ] 接口文档
++ [ ] 自定义注解
++ [ ] 服务器监控
++ [ ] 测试
++ [ ] 拦截器
++ [ ] 异常处理
++ [ ] 结果包装
++ [ ] 短信
++ [ ] 代码生成器
++ [ ] 
 
+### 业务
 
-- ### 开发语言
-
-- [ ] ES6
-- [ ] HTML5
-- [ ] CSS3
-
-- ### 中间件
-- [ ] Element-UI
-- [ ] Bootstrap
-- [ ] jQuery
-- [ ] Promise
-- [ ] Node.js
-- [ ] AJAX
-- [ ] axios
-- [ ] Webpack5
-- [ ] React
-- [ ] Vue
-- [ ] TypeScript
-- [ ] 微信小程序
-
-## 移动端
-- [ ] Android
-
++ [ ] 分库分表
++ [ ] 多数据源切换
 ## 实战项目
 - [ ] 谷粒商城
 ## 其他学科
