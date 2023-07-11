@@ -1,0 +1,15 @@
+09:42:30.738 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.0.Final
+09:42:30.754 [restartedMain] INFO  c.j.DzxtServerApplication - [logStarting,55] - Starting DzxtServerApplication using Java 17.0.4.1 on DESKTOP-8NFLKT5 with PID 17892 (D:\Projects\MY\mylearnproject\dzzlrkxt_java\target\classes started by PC in D:\Projects\MY\mylearnproject)
+09:42:30.754 [restartedMain] INFO  c.j.DzxtServerApplication - [logStartupProfileInfo,639] - The following profiles are active: test
+09:42:32.138 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8081"]
+09:42:32.138 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+09:42:32.138 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.55]
+09:42:32.249 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+09:42:33.507 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+09:42:34.127 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8081"]
+09:42:34.148 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+09:42:34.165 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+09:42:34.201 [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+09:42:34.276 [restartedMain] INFO  c.j.DzxtServerApplication - [logStarted,61] - Started DzxtServerApplication in 3.773 seconds (JVM running for 4.488)
+09:42:35.130 [JavaFX Application Thread] INFO  c.a.d.p.DruidDataSource - [init,991] - {dataSource-1} inited
+09:42:48.941 [JavaFX Application Thread] INFO  javafx.css - [log,274] - Could not find stylesheet: file:/D:/Projects/MY/mylearnproject/dzzlrkxt_java/target/classes/fxml/DateTimePicker.css

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="index" prefHeight="1065.0" prefWidth="1474.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jeethink.project.dzzlrkxt.view.IndexController">
+        <left>
+            <VBox prefHeight="498.0" prefWidth="172.0" BorderPane.alignment="CENTER">
+<!--                <Button id="oneMap" fx:id="oneMapButton" mnemonicParsing="false" onMouseClicked="#clickOneMapButton" prefHeight="62.0" prefWidth="175.0" text="一图展示" />-->
+                <Button id="projectManage" fx:id="projectManageButton" mnemonicParsing="false" onMouseClicked="#clickProjectManageButton" prefHeight="56.0" prefWidth="179.0" text="项目管理" />
+                <Button id="drillManage" fx:id="drillManageButton" mnemonicParsing="false" onMouseClicked="#clickDrillManageButton" prefHeight="63.0" prefWidth="187.0" text="钻孔管理" />
+            </VBox>
+        </left>
+        <top>
+            <HBox prefHeight="16.0" prefWidth="1115.0" BorderPane.alignment="CENTER">
+                <ImageView fitHeight="170.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../img/logo.png"/>
+                </ImageView>
+                <TextArea disable="true" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="147.0" prefWidth="1320.0" text="地质资料管理系统" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="54.0" />
+                    </font>
+                </TextArea>
+            </HBox>
+        </top>
+    </BorderPane>

@@ -5,16 +5,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!--        <version>2.3.3.RELEASE</version>-->
+        <!--<version>2.3.3.RELEASE</version>-->
         <version>2.6.3</version>
-
-
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
 
     <groupId>pers.lxl</groupId>
     <artifactId>mylearnproject</artifactId>
+    <!--多模块打包方式为pom    packaging‘ with value ‘jar‘ is invalid. Aggregator projects require ‘pom‘ as packaging.-->
     <packaging>pom</packaging><!--Java Web Application Archive-->
     <version>0.0.1-SNAPSHOT</version>
     <name>mylearnproject</name>
@@ -31,15 +30,23 @@
             <id>osgeo</id>
             <name>OSGeo Release Repository</name>
             <url>https://repo.osgeo.org/repository/release/</url>
-            <snapshots><enabled>false</enabled></snapshots>
-            <releases><enabled>true</enabled></releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
         <repository>
             <id>osgeo-snapshot</id>
             <name>OSGeo Snapshot Repository</name>
             <url>https://repo.osgeo.org/repository/snapshot/</url>
-            <snapshots><enabled>true</enabled></snapshots>
-            <releases><enabled>false</enabled></releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
     </repositories>
     <dependencies>

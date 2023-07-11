@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import com.jeethink.project.dzzlrkxt.view.dateTimePicker.DateTimePicker?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jeethink.project.dzzlrkxt.view.DetailController">
+   <children>
+      <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="918.0" style="-fx-background-color: #d7d7d7;">
+         <children>
+            <Button fx:id="projectDetailSaveButton" mnemonicParsing="false" onMouseClicked="#clickProjectDetailSaveButton" prefHeight="34.0" prefWidth="119.0" style="-fx-background-color: #139cd6;" text="保存" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="projectDetailCancelButton" mnemonicParsing="false" onMouseClicked="#clickProjectDetailCancelButton" prefHeight="36.0" prefWidth="111.0" text="取消">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <ProgressBar fx:id="processBar" prefHeight="17.0" prefWidth="936.0" progress="0.0" />
+      <TitledPane animated="false" text="项目基本信息">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="225.0" prefWidth="905.0">
+               <children>
+                  <GridPane layoutX="6.0" layoutY="-3.0" prefHeight="238.0" prefWidth="906.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="projectName">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="项目名称">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="项目范围矢量" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="hjpzbh" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="汇交凭证编号" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="projectLocation" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="项目位置" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="zlmc" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="资料名称" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="所属区县" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="fgtzdm" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="发改投资代码" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                           <children>
+                              <Label text="已上传">
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="shpName" text="暂无文件">
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="deleteShpButton" onMouseClicked="#clickDeleteShpButton" text="删除" underline="true">
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Label>
+                              <Label fx:id="showShpButton" onMouseClicked="#clickShowShpButton" text="查看" underline="true">
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button fx:id="uploadShpButton" mnemonicParsing="false" onMouseClicked="#clickUploadShpButton" prefHeight="24.0" prefWidth="119.0" style="-fx-background-color: #139cd6;" text="上传矢量" textFill="WHITE" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Label fx:id="shp" disable="true" text="shp" visible="false" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="340.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <ChoiceBox fx:id="qy" prefHeight="27.0" prefWidth="337.0" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </ChoiceBox>
+                        <Button fx:id="uploadDrillButton" mnemonicParsing="false" onMouseClicked="#clickUploadDrillButton" prefHeight="24.0" prefWidth="119.0" style="-fx-background-color: #139cd6;" text="上传钻孔" textFill="WHITE" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="250.0" />
+                           </GridPane.margin>
+                        </Button>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane animated="false" text="数据汇交信息">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="168.0" prefWidth="916.0">
+               <children>
+                  <GridPane layoutY="7.0" prefHeight="144.0" prefWidth="906.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextField fx:id="hjdw">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="汇交单位">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="hjdwlxr" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="汇交单位联系人" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="汇交时间" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="hjdwlxrdh" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="联系方式" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="zlxcdw" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="资料形成单位" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="形成时间" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="zlxcdwlxr" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label prefHeight="32.0" prefWidth="89.0" text="资料形成单位联系人" wrapText="true" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="zlxcdwlxrdh" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="联系方式" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <DatePicker fx:id="hjTime" prefHeight="23.0" prefWidth="331.0" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </DatePicker>
+                        <DatePicker prefHeight="23.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="xcTime">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </DatePicker>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" text="数据入库信息">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="82.0" prefWidth="909.0">
+               <children>
+                  <GridPane layoutY="-3.0" prefHeight="92.0" prefWidth="906.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextField fx:id="rkLxr">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="入库人员">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="入库时间" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="drillNum" disable="true" editable="false" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="钻孔点位数" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <DateTimePicker fx:id="rkTime" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="120.0" top="15"/>
+                           </GridPane.margin>
+                        </DateTimePicker>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+   </children>
+</VBox>

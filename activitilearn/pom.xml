@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dongmen</groupId>
-    <artifactId>testActSpringBoot</artifactId>
+    <artifactId>activitilearn</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>

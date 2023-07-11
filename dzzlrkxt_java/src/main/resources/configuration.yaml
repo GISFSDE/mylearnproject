@@ -1,0 +1,14 @@
+#客户端配置文件，指定已分析项目，项目路径，初始化项目路径
+#项目分析过后存放地址：projectPath/projectName
+
+#项目分析后存放路径
+projectPath:
+  C:/jeethink/dtfhxsc/uploadPath
+libreoffice:
+  D:/SOFT/Installed/libreoffice
+#为true表示第一次使用，需初始化路径
+first:
+  true
+#所以已分析过后的项目名
+projectName:
+

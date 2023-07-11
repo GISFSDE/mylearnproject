@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.project.dzzlrkxt.mapper.DzProjectMapper">
+    <resultMap id="BaseResultMap" type="com.jeethink.project.dzzlrkxt.domain.DzProject">
+            <id property="projectId" column="project_id" />
+            <result property="hjpzbh" column="hjpzbh" />
+            <result property="projectName" column="project_name" />
+            <result property="fgtzdm" column="fgtzdm" />
+            <result property="zlmc" column="zlmc" />
+            <result property="qy" column="qy" />
+            <result property="projectLocation" column="project_location" />
+            <result property="hjdw" column="hjdw"/>
+            <result property="hjTime" column="hj_time"/>
+            <result property="hjdwlxr" column="hjdwlxr"/>
+            <result property="hjdwlxrdh" column="hjdwlxrdh"/>
+            <result property="zlxcdw" column="zlxcdw" />
+            <result property="xcTime" column="xc_time" />
+            <result property="zlxcdwlxr" column="zlxcdwlxr" />
+            <result property="zlxcdwlxrdh" column="zlxcdwlxrdh" />
+            <result property="rkTime" column="rk_time"/>
+            <result property="rkLxr" column="rk_lxr" />
+            <result property="remark" column="remark"/>
+            <result property="shp" column="shp"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        project_id,hjpzbh,project_name,
+        fgtzdm,zlmc,qy,
+        project_location,hjdw,hj_time,
+        hjdwlxr,hjdwlxrdh,zlxcdw,
+        xc_time,zlxcdwlxr,zlxcdwlxrdh,
+        rk_time,rk_lxr,remark,
+        shp
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from dz_project
+        where  project_id = #{project_id,jdbcType=BIGINT}
+    </select>
+<select id="selectProjectList" parameterType="DzProject" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from dz_project
+    <where>
+        <if test="hjpzbh != null and hjpzbh != ''">AND
+            hjpzbh like concat('%',#{hjpzbh}::text,'%')
+        </if>
+        <if test="projectName != null and projectName!= ''">AND
+            project_name like concat('%', #{projectName}::text, '%')
+        </if>
+        <if test="fgtzdm != null and fgtzdm!= ''">AND
+            fgtzdm like concat('%',#{fgtzdm}::text,'%')
+        </if>
+        <if test="zlmc != null">AND
+            zlmc = #{zlmc,jdbcType=VARCHAR}
+        </if>
+        <if test="qy != null">AND
+            qy = #{qy,jdbcType=VARCHAR}
+        </if>
+        <if test="projectLocation != null">AND
+            project_location = #{projectLocation,jdbcType=VARCHAR}
+        </if>
+        <if test="hjdw != null and hjdw!= ''">AND
+            hjdw like concat('%',#{hjdw}::text,'%')
+        </if>
+        <if test="hjTime != null">AND
+            hj_time = #{hjTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="hjdwlxr != null">AND
+            hjdwlxr = #{hjdwlxr,jdbcType=VARCHAR}
+        </if>
+        <if test="hjdwlxrdh != null">AND
+            hjdwlxrdh = #{hjdwlxrdh,jdbcType=VARCHAR}
+        </if>
+        <if test="zlxcdw != null and zlxcdw!= ''">AND
+            zlxcdw like concat('%',#{zlxcdw}::text,'%')
+        </if>
+        <if test="xcTime != null">AND
+            xc_time = #{xcTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="zlxcdwlxr != null">AND
+            zlxcdwlxr = #{zlxcdwlxr,jdbcType=VARCHAR}
+        </if>
+        <if test="zlxcdwlxrdh != null">AND
+            zlxcdwlxrdh = #{zlxcdwlxrdh,jdbcType=VARCHAR}
+        </if>
+        <if test="rkTime != null">AND
+            rk_time = #{rkTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="rkLxr != null">AND
+            rk_lxr = #{rkLxr,jdbcType=VARCHAR}
+        </if>
+        <if test="remark != null">AND
+            remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="shp != null">AND
+            shp = #{shp,jdbcType=OTHER}
+        </if>
+    </where>
+    order BY rk_time desc
+</select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from dz_project
+        where  project_id = #{project_id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="project_id" keyProperty="project_id" parameterType="com.jeethink.project.dzzlrkxt.domain.DzProject" useGeneratedKeys="true">
+        insert into dz_project
+        ( project_id,hjpzbh,project_name
+        ,fgtzdm,zlmc,qy
+        ,project_location,hjdw,hj_time
+        ,hjdwlxr,hjdwlxrdh,zlxcdw
+        ,xc_time,zlxcdwlxr,zlxcdwlxrdh
+        ,rk_time,rk_lxr,remark
+        ,shp)
+        values (#{project_id,jdbcType=BIGINT},#{hjpzbh,jdbcType=VARCHAR},#{project_name,jdbcType=VARCHAR}
+        ,#{fgtzdm,jdbcType=VARCHAR},#{zlmc,jdbcType=VARCHAR},#{qy,jdbcType=VARCHAR}
+        ,#{project_location,jdbcType=VARCHAR},#{hjdw,jdbcType=VARCHAR},#{hj_time,jdbcType=TIMESTAMP}
+        ,#{hjdwlxr,jdbcType=VARCHAR},#{hjdwlxrdh,jdbcType=VARCHAR},#{zlxcdw,jdbcType=VARCHAR}
+        ,#{xc_time,jdbcType=TIMESTAMP},#{zlxcdwlxr,jdbcType=VARCHAR},#{zlxcdwlxrdh,jdbcType=VARCHAR}
+        ,#{rk_time,jdbcType=TIMESTAMP},#{rk_lxr,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR}
+        ,#{shp,jdbcType=OTHER})
+    </insert>
+    <insert id="insertSelective" keyColumn="project_id" keyProperty="project_id" parameterType="com.jeethink.project.dzzlrkxt.domain.DzProject" useGeneratedKeys="true">
+        insert into dz_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="projectId != null">project_id,</if>
+                <if test="hjpzbh != null">hjpzbh,</if>
+                <if test="projectName != null">project_name,</if>
+                <if test="fgtzdm != null">fgtzdm,</if>
+                <if test="zlmc != null">zlmc,</if>
+                <if test="qy != null">qy,</if>
+                <if test="projectLocation != null">project_location,</if>
+                <if test="hjdw != null">hjdw,</if>
+                <if test="hjTime != null">hj_time,</if>
+                <if test="hjdwlxr != null">hjdwlxr,</if>
+                <if test="hjdwlxrdh != null">hjdwlxrdh,</if>
+                <if test="zlxcdw != null">zlxcdw,</if>
+                <if test="xcTime != null">xc_time,</if>
+                <if test="zlxcdwlxr != null">zlxcdwlxr,</if>
+                <if test="zlxcdwlxrdh != null">zlxcdwlxrdh,</if>
+                <if test="rkTime != null">rk_time,</if>
+                <if test="rkLxr != null">rk_lxr,</if>
+                <if test="remark != null">remark,</if>
+                <if test="shp != null">shp,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="projectId != null">#{projectId,jdbcType=BIGINT},</if>
+                <if test="hjpzbh != null">#{hjpzbh,jdbcType=VARCHAR},</if>
+                <if test="projectName != null">#{projectName,jdbcType=VARCHAR},</if>
+                <if test="fgtzdm != null">#{fgtzdm,jdbcType=VARCHAR},</if>
+                <if test="zlmc != null">#{zlmc,jdbcType=VARCHAR},</if>
+                <if test="qy != null">#{qy,jdbcType=VARCHAR},</if>
+                <if test="projectLocation != null">#{projectLocation,jdbcType=VARCHAR},</if>
+                <if test="hjdw != null">#{hjdw,jdbcType=VARCHAR},</if>
+                <if test="hjTime != null">#{hjTime,jdbcType=TIMESTAMP},</if>
+                <if test="hjdwlxr != null">#{hjdwlxr,jdbcType=VARCHAR},</if>
+                <if test="hjdwlxrdh != null">#{hjdwlxrdh,jdbcType=VARCHAR},</if>
+                <if test="zlxcdw != null">#{zlxcdw,jdbcType=VARCHAR},</if>
+                <if test="xcTime != null">#{xcTime,jdbcType=TIMESTAMP},</if>
+                <if test="zlxcdwlxr != null">#{zlxcdwlxr,jdbcType=VARCHAR},</if>
+                <if test="zlxcdwlxrdh != null">#{zlxcdwlxrdh,jdbcType=VARCHAR},</if>
+                <if test="rkTime != null">#{rkTime,jdbcType=TIMESTAMP},</if>
+                <if test="rkLxr != null">#{rkLxr,jdbcType=VARCHAR},</if>
+                <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
+                <if test="shp != null">st_geomfromtext(#{shp},4490),</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jeethink.project.dzzlrkxt.domain.DzProject">
+        update dz_project
+        <set>
+                <if test="hjpzbh != null">
+                    hjpzbh = #{hjpzbh,jdbcType=VARCHAR},
+                </if>
+                <if test="project_name != null">
+                    project_name = #{project_name,jdbcType=VARCHAR},
+                </if>
+                <if test="fgtzdm != null">
+                    fgtzdm = #{fgtzdm,jdbcType=VARCHAR},
+                </if>
+                <if test="zlmc != null">
+                    zlmc = #{zlmc,jdbcType=VARCHAR},
+                </if>
+                <if test="qy != null">
+                    qy = #{qy,jdbcType=VARCHAR},
+                </if>
+                <if test="project_location != null">
+                    project_location = #{project_location,jdbcType=VARCHAR},
+                </if>
+                <if test="hjdw != null">
+                    hjdw = #{hjdw,jdbcType=VARCHAR},
+                </if>
+                <if test="hj_time != null">
+                    hj_time = #{hj_time,jdbcType=TIMESTAMP},
+                </if>
+                <if test="hjdwlxr != null">
+                    hjdwlxr = #{hjdwlxr,jdbcType=VARCHAR},
+                </if>
+                <if test="hjdwlxrdh != null">
+                    hjdwlxrdh = #{hjdwlxrdh,jdbcType=VARCHAR},
+                </if>
+                <if test="zlxcdw != null">
+                    zlxcdw = #{zlxcdw,jdbcType=VARCHAR},
+                </if>
+                <if test="xc_time != null">
+                    xc_time = #{xc_time,jdbcType=TIMESTAMP},
+                </if>
+                <if test="zlxcdwlxr != null">
+                    zlxcdwlxr = #{zlxcdwlxr,jdbcType=VARCHAR},
+                </if>
+                <if test="zlxcdwlxrdh != null">
+                    zlxcdwlxrdh = #{zlxcdwlxrdh,jdbcType=VARCHAR},
+                </if>
+                <if test="rk_time != null">
+                    rk_time = #{rk_time,jdbcType=TIMESTAMP},
+                </if>
+                <if test="rk_lxr != null">
+                    rk_lxr = #{rk_lxr,jdbcType=VARCHAR},
+                </if>
+                <if test="remark != null">
+                    remark = #{remark,jdbcType=VARCHAR},
+                </if>
+                <if test="shp != null">
+                    shp = #{shp,jdbcType=OTHER},
+                </if>
+        </set>
+        where   project_id = #{project_id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jeethink.project.dzzlrkxt.domain.DzProject">
+        update dz_project
+        set 
+            hjpzbh =  #{hjpzbh,jdbcType=VARCHAR},
+            project_name =  #{project_name,jdbcType=VARCHAR},
+            fgtzdm =  #{fgtzdm,jdbcType=VARCHAR},
+            zlmc =  #{zlmc,jdbcType=VARCHAR},
+            qy =  #{qy,jdbcType=VARCHAR},
+            project_location =  #{project_location,jdbcType=VARCHAR},
+            hjdw =  #{hjdw,jdbcType=VARCHAR},
+            hj_time =  #{hj_time,jdbcType=TIMESTAMP},
+            hjdwlxr =  #{hjdwlxr,jdbcType=VARCHAR},
+            hjdwlxrdh =  #{hjdwlxrdh,jdbcType=VARCHAR},
+            zlxcdw =  #{zlxcdw,jdbcType=VARCHAR},
+            xc_time =  #{xc_time,jdbcType=TIMESTAMP},
+            zlxcdwlxr =  #{zlxcdwlxr,jdbcType=VARCHAR},
+            zlxcdwlxrdh =  #{zlxcdwlxrdh,jdbcType=VARCHAR},
+            rk_time =  #{rk_time,jdbcType=TIMESTAMP},
+            rk_lxr =  #{rk_lxr,jdbcType=VARCHAR},
+            remark =  #{remark,jdbcType=VARCHAR},
+            shp =  #{shp,jdbcType=OTHER}
+        where   project_id = #{project_id,jdbcType=BIGINT} 
+    </update>
+</mapper>

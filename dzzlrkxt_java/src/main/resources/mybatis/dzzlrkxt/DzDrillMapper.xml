@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.project.dzzlrkxt.mapper.DzDrillMapper">
+
+    <resultMap id="BaseResultMap" type="com.jeethink.project.dzzlrkxt.domain.DzDrill">
+        <!--@Table dz_drill-->
+        <result property="drillId" column="drill_id" jdbcType="INTEGER"/>
+        <result property="drillBh" column="drill_bh" jdbcType="VARCHAR"/>
+        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="drillType" column="drill_type" jdbcType="VARCHAR"/>
+        <result property="localtionX" column="localtion_x" jdbcType="VARCHAR"/>
+        <result property="localtionY" column="localtion_y" jdbcType="VARCHAR"/>
+        <result property="drillElevation" column="drill_elevation" jdbcType="VARCHAR"/>
+        <result property="drillDepth" column="drill_depth" jdbcType="VARCHAR"/>
+        <result property="groundwaterDepth" column="groundwater_depth" jdbcType="VARCHAR"/>
+        <result property="groundwaterElevation" column="groundwater_elevation" jdbcType="VARCHAR"/>
+        <result property="localtion" column="localtion" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          drill_id, drill_bh, project_id, drill_type, localtion_x, localtion_y, drill_elevation, drill_depth, groundwater_depth, groundwater_elevation, localtion, create_time
+        from dz_drill
+        where drill_id = #{drillId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+        drill_id, drill_bh, project_id, drill_type, localtion_x, localtion_y, drill_elevation, drill_depth, groundwater_depth, groundwater_elevation, localtion, create_time
+        from dz_drill
+        <where>
+            <if test="drillId != null">
+                and drill_id = #{drillId}
+            </if>
+            <if test="drillBh != null and drillBh != ''">
+                and drill_bh = #{drillBh}
+            </if>
+            <if test="projectId != null">
+                and project_id = #{projectId}
+            </if>
+            <if test="drillType != null and drillType != ''">
+                and drill_type = #{drillType}
+            </if>
+            <if test="localtionX != null and localtionX != ''">
+                and localtion_x = #{localtionX}
+            </if>
+            <if test="localtionY != null and localtionY != ''">
+                and localtion_y = #{localtionY}
+            </if>
+            <if test="drillElevation != null and drillElevation != ''">
+                and drill_elevation = #{drillElevation}
+            </if>
+            <if test="drillDepth != null and drillDepth != ''">
+                and drill_depth = #{drillDepth}
+            </if>
+            <if test="groundwaterDepth != null and groundwaterDepth != ''">
+                and groundwater_depth = #{groundwaterDepth}
+            </if>
+            <if test="groundwaterElevation != null and groundwaterElevation != ''">
+                and groundwater_elevation = #{groundwaterElevation}
+            </if>
+            <if test="localtion != null and localtion != ''">
+                and localtion = #{localtion}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        order BY create_time desc
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          drill_id, drill_bh, project_id, drill_type, localtion_x, localtion_y, drill_elevation, drill_depth, groundwater_depth, groundwater_elevation, localtion, create_time
+        from public.dz_drill
+    </select>
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from dz_drill
+        <where>
+            <if test="drillId != null">
+                and drill_id = #{drillId}
+            </if>
+            <if test="drillBh != null and drillBh != ''">
+                and drill_bh = #{drillBh}
+            </if>
+            <if test="projectId != null">
+                and project_id = #{projectId}
+            </if>
+            <if test="drillType != null and drillType != ''">
+                and drill_type = #{drillType}
+            </if>
+            <if test="localtionX != null and localtionX != ''">
+                and localtion_x = #{localtionX}
+            </if>
+            <if test="localtionY != null and localtionY != ''">
+                and localtion_y = #{localtionY}
+            </if>
+            <if test="drillElevation != null and drillElevation != ''">
+                and drill_elevation = #{drillElevation}
+            </if>
+            <if test="drillDepth != null and drillDepth != ''">
+                and drill_depth = #{drillDepth}
+            </if>
+            <if test="groundwaterDepth != null and groundwaterDepth != ''">
+                and groundwater_depth = #{groundwaterDepth}
+            </if>
+            <if test="groundwaterElevation != null and groundwaterElevation != ''">
+                and groundwater_elevation = #{groundwaterElevation}
+            </if>
+            <if test="localtion != null and localtion != ''">
+                and localtion = #{localtion}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+    <select id="queryDrillType" resultType="string">
+        select drill_type from dz_drill group by drill_type
+    </select>
+    <select id="queryByIds" resultMap="BaseResultMap">
+        select
+        drill_id, drill_bh, project_id, drill_type, localtion_x, localtion_y, drill_elevation, drill_depth,
+        groundwater_depth, groundwater_elevation, localtion, create_time from dz_drill
+        where project_id IN
+        <foreach collection="drillIds" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        <if test="drillType != null and drillType != ''">
+            and drill_type = #{drillType}
+        </if>
+
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="drillId" useGeneratedKeys="true">
+        insert into dz_drill(drill_bh, drill_type, localtion_x, localtion_y, drill_elevation, drill_depth, groundwater_depth, groundwater_elevation, localtion, create_time)
+        values (#{drillBh}, #{drillType}, #{localtionX}, #{localtionY}, #{drillElevation}, #{drillDepth}, #{groundwaterDepth}, #{groundwaterElevation}, #{localtion}, #{createTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="drillId" useGeneratedKeys="true">
+        insert into dz_drill(drill_id,project_id,drill_bh, drill_type, localtion_x, localtion_y, drill_elevation, drill_depth, groundwater_depth, groundwater_elevation, localtion, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.drillId},#{entity.projectId},#{entity.drillBh}, #{entity.drillType}, #{entity.localtionX}, #{entity.localtionY}
+        , #{entity.drillElevation}, #{entity.drillDepth}, #{entity.groundwaterDepth}, #{entity.groundwaterElevation},st_geomfromtext(#{entity.localtion},4490), #{entity.createTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="drillId" useGeneratedKeys="true">
+        insert into dz_drill(drill_bh, drill_type, localtion_x, localtion_y, drill_elevation, drill_depth, groundwater_depth, groundwater_elevation, localtion, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.drillBh}, #{entity.drillType}, #{entity.localtionX}, #{entity.localtionY}, #{entity.drillElevation}, #{entity.drillDepth}, #{entity.groundwaterDepth}, #{entity.groundwaterElevation}, #{entity.localtion}, #{entity.createTime})
+        </foreach>
+        on duplicate key update
+        drill_bh = values(drill_bh),
+        drill_type = values(drill_type),
+        localtion_x = values(localtion_x),
+        localtion_y = values(localtion_y),
+        drill_elevation = values(drill_elevation),
+        drill_depth = values(drill_depth),
+        groundwater_depth = values(groundwater_depth),
+        groundwater_elevation = values(groundwater_elevation),
+        localtion = values(localtion)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update dz_drill
+        <set>
+            <if test="drillBh != null and drillBh != ''">
+                drill_bh = #{drillBh},
+            </if>
+            <if test="drillType != null and drillType != ''">
+                drill_type = #{drillType},
+            </if>
+            <if test="localtionX != null and localtionX != ''">
+                localtion_x = #{localtionX},
+            </if>
+            <if test="localtionY != null and localtionY != ''">
+                localtion_y = #{localtionY},
+            </if>
+            <if test="drillElevation != null and drillElevation != ''">
+                drill_elevation = #{drillElevation},
+            </if>
+            <if test="drillDepth != null and drillDepth != ''">
+                drill_depth = #{drillDepth},
+            </if>
+            <if test="groundwaterDepth != null and groundwaterDepth != ''">
+                groundwater_depth = #{groundwaterDepth},
+            </if>
+            <if test="groundwaterElevation != null and groundwaterElevation != ''">
+                groundwater_elevation = #{groundwaterElevation},
+            </if>
+            <if test="localtion != null and localtion != ''">
+                localtion = #{localtion},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where drill_id = #{drillId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from dz_drill where drill_id = #{drillId}
+    </delete>
+
+</mapper>
+

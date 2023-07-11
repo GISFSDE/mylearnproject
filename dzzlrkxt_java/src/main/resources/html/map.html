@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>module3d</title>
+    <link rel="stylesheet" href="static/Cesium1.89/Widgets/widgets.css">
+    <script src="static/Cesium1.89/Cesium.js"></script>
+</head>
+
+<body>
+<div class="allButtons">
+    <button class="buttons" onclick="flyTo()">定位杭州</button>
+    <button class="buttons" onclick="addPoints()">加载点位</button>
+    <!-- <hr /> -->
+    <button class="buttons" onclick="addWFS()">区域定位</button>
+    <button class="buttons" onclick="removeAll()">清除</button>
+</div>
+<iframe class="content" width="85%" allowTransparency='true' allowfullscreen=true id="MainIframe"
+        src="http://126.10.1.210:8081/#/?token=02CFA9FEC4F9E291CD0D9E364618EF30B30C87230B72150F40AA663FD046C9A5E107989088C089C807F447C57852615C"></iframe>
+
+
+<!--  src="https://ditu.gongshu.gov.cn:8083/#/?token=02CFA9FEC4F9E291CD0D9E364618EF30B30C87230B72150F40AA663FD046C9A5E107989088C089C807F447C57852615C"></iframe>  -->
+
+</body>
+
+</html>
+<script>
+    function flyTo() {
+        var params = {
+            methodName: "flyTo",
+            param: {
+                flyOption: {
+                    x: 120.16035671723917,
+                    y: 30.33008086725469,
+                    z: 1000.0,
+                    orientation: {
+                        heading: -175.0,
+                        pitch: -35.0,
+                        roll: 0.0,
+                    },
+                    duration: 3,
+                }
+            }
+        }
+        document.getElementById("MainIframe").contentWindow.postMessage(params, "*");
+    }
+    function addWFS() {
+        var params = {
+            methodName: "addWFS",
+            param: {
+                csName: "东新街道",//"米市社区",
+                height: "100",
+                strokeColor: '254, 254, 253,1',
+                fillColor: '98, 166, 109,0.5',
+                csType: 1,
+            }
+        }
+        document.getElementById("MainIframe").contentWindow.postMessage(params, "*");
+    }
+    function addPoints() {
+        var params = {
+            methodName: "addPoints",
+            param: {
+                popupPosition: ["10%", "20%"],
+                pointsData: [{
+                    title: "浙江省杭州市余杭区玉鸟路1号",
+                    position: {
+                        lat: 30.30505153606012,
+                        lng: 120.11505068333292,
+                        height: 1000,
+                    },
+                    id: "001",
+                    group: "玉鸟路",
+                    logo: "/static/images/position1.png",
+                    pointType: "WGS",
+                    scale: 5.0,
+                    width: 11,
+                    height: 11,
+                    sizeInMeters: false,
+                    jumpers: [
+                        {
+                            urlName: "查看实时监控",
+                            jumpUrl:
+                                "https://www.bilibili.com/?spm_id_from=333.788.b_696e7465726e6174696f6e616c486561646572.1",
+                        },
+                        {
+                            urlName: "查看视频",
+                            jumpUrl:
+                                "https://www.bilibili.com/?spm_id_from=333.788.b_696e7465726e6174696f6e616c486561646572.1",
+                        },
+                        {
+                            urlName: "查看图片",
+                            jumpUrl: "https://img-blog.csdnimg.cn/20200727163728862.png",
+                        },
+                    ],
+                    pics: [{ picUrl: "/static/images/position.png" }],
+                    baseInfo: [
+                        {
+                            fieldName: "项目名",
+                            fieldUrl:
+                                "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                            fieldValue: "一期三维组件",
+                            fieldStyle: "",
+                            fieldOrder: 1,
+                        },
+                        {
+                            fieldName: "地址",
+                            fieldUrl:
+                                "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                            fieldValue: "文三路十五号",
+                            fieldStyle: "",
+                            fieldOrder: 5,
+                        },
+                        {
+                            fieldName: "面积",
+                            fieldUrl:
+                                "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                            fieldValue: "2999平方米",
+                            fieldStyle: "",
+                            fieldOrder: 2,
+                        },
+                        {
+                            fieldName: "类型",
+                            fieldUrl:
+                                "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                            fieldValue: "非涉矿",
+                            fieldStyle: "",
+                            fieldOrder: 4,
+                        },
+                        {
+                            fieldName: "省",
+                            fieldUrl:
+                                "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                            fieldValue: "浙江省",
+                            fieldStyle: "",
+                            fieldOrder: 3,
+                        },
+                    ],
+                    description: "一期三维组件,查看实时监控",
+                },
+                    {
+                        title: "浙江省杭州市余杭区玉鸟路2号",
+                        position: {
+                            lat: 30.298295788813018,
+                            lng: 120.16744835952638,
+                            height: 1000,
+                        },
+                        id: "002",
+                        group: "玉鸟路",
+                        logo: "  ",
+                        pointType: "WGS",
+                        scale: 2.0,
+                        width: 11,
+                        height: 11,
+                        jumpers: [
+                            {
+                                urlName: "查看实时监控",
+                                jumpUrl:
+                                    "https://www.bilibili.com/?spm_id_from=333.788.b_696e7465726e6174696f6e616c486561646572.1",
+                            },
+                            {
+                                urlName: "查看视频",
+                                jumpUrl:
+                                    "https://www.bilibili.com/?spm_id_from=333.788.b_696e7465726e6174696f6e616c486561646572.1",
+                            },
+                            {
+                                urlName: "查看图片",
+                                jumpUrl: "https://img-blog.csdnimg.cn/20200727163728862.png",
+                            },
+                        ],
+                        pics: [{ picUrl: "/static/images/position1.png" }],
+                        baseInfo: [
+                            {
+                                fieldName: "项目名",
+                                fieldUrl:
+                                    "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                                fieldValue: "一期三维组件",
+                                fieldStyle: "",
+                                fieldOrder: 1,
+                            },
+                            {
+                                fieldName: "地址",
+                                fieldUrl:
+                                    "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                                fieldValue: "文三路十五号",
+                                fieldStyle: "",
+                                fieldOrder: 1,
+                            },
+                            {
+                                fieldName: "面积",
+                                fieldUrl:
+                                    "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                                fieldValue: "2999平方米",
+                                fieldStyle: "",
+                                fieldOrder: 1,
+                            },
+                            {
+                                fieldName: "类型",
+                                fieldUrl:
+                                    "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                                fieldValue: "非涉矿",
+                                fieldStyle: "",
+                                fieldOrder: 1,
+                            },
+                            {
+                                fieldName: "省",
+                                fieldUrl:
+                                    "https://blog.csdn.net/weixin_42539678/article/details/122683572",
+                                fieldValue: "浙江省",
+                                fieldStyle: "",
+                                fieldOrder: 1,
+                            },
+                        ],
+                        description: "一期三维组件,查看实时监控",
+                    }],
+            }
+        }
+        document.getElementById("MainIframe").contentWindow.postMessage(params, "*");
+    }
+    function removeAll() {
+        var params = {
+            methodName: "removeAll",
+            param: {
+                type: "point",//all,
+                id: ["001", "002"]
+            }
+        }
+        document.getElementById("MainIframe").contentWindow.postMessage(params, "*");
+    }
+</script>
+<style>
+    .buttons {
+        float: left;
+        margin-right: 6px;
+    }
+
+    .allButtons {
+        width: 14%;
+        margin: 1%;
+        position: absolute;
+    }
+
+    .content {
+        right: 0;
+        margin-left: 10%;
+        position: absolute;
+        height: 100vh;
+    }
+</style>
