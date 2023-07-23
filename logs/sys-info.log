@@ -13,3 +13,5 @@
 09:42:34.276 [restartedMain] INFO  c.j.DzxtServerApplication - [logStarted,61] - Started DzxtServerApplication in 3.773 seconds (JVM running for 4.488)
 09:42:35.130 [JavaFX Application Thread] INFO  c.a.d.p.DruidDataSource - [init,991] - {dataSource-1} inited
 09:42:48.941 [JavaFX Application Thread] INFO  javafx.css - [log,274] - Could not find stylesheet: file:/D:/Projects/MY/mylearnproject/dzzlrkxt_java/target/classes/fxml/DateTimePicker.css
+09:53:26.130 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+09:53:26.133 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,1928] - {dataSource-1} closed

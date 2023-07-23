@@ -1,0 +1,52 @@
+server:
+  port: 8765
+name: 我帅得一匹
+age: 22
+content: "name:${name},age:${age}"
+student:
+  name: 真的帅
+  age: 21
+#添加thymeleaf依赖后jsp会报错找不到，要两者同时使用方法如下，templates下新添thy文件夹，返回路径前加thy/
+spring:
+  thymeleaf:
+    view-names: thy/*
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=Utf-8
+    username: root
+    password: 724111
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update  #新增数据库连接必备参数
+  redis:
+    database: 0
+    host: 140.143.23.94
+    password: 123
+    port: 6379
+    timeout: 3000       # 连接超时时间 单位 ms（毫秒）
+    #    cluster:
+    #      nodes: 10.3.1.4:7000,10.3.1.4:7001,...,10.3.1.4:7008
+    pool:
+      max-idle: 8       # 连接池中的最大空闲连接，默认值也是8
+      min-idle: 0       # 连接池中的最小空闲连接，默认值也是0
+      max-active: 8     # 如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
+      max-wait: -1      # 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出
+#文件名必须是application.yml
+#  YAML加载属性到内存中保存的时候是有序的
+#定义不同环境设置
+  #server:
+  #    port: 8881
+  #---
+  #spring:
+  #    profiles: test
+  #server:
+  #    port: 8882
+  #---
+  #spring:
+  #    profiles: prod
+  #server:
+  #    port: 8883

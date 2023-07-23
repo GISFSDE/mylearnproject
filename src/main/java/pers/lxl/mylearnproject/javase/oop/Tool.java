@@ -19,7 +19,6 @@ class Phone extends Tool {
     public void use() {
         System.out.println("I can call.");
     }
-
 }
 
 //在抽象类中，抽象方法本质上是定义接口规范：即规定高层类的接口，从而保证所有子类都有相同的接口实现，这样，多态就能发挥出威力。
