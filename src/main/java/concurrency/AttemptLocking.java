@@ -5,6 +5,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.locks.*;
 
 public class AttemptLocking {
+  // 允许尝试获取获取锁，尝试中可选择离开
   private ReentrantLock lock = new ReentrantLock();
   public void untimed() {
     boolean captured = lock.tryLock();
