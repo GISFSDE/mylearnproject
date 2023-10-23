@@ -671,7 +671,7 @@ public class GeoUtils {
     }
 
     public static JSONArray getAnalysisResult(String Params, Boolean isNeedLog) throws IOException {
-        String url = "http://172.18.2.90:3080/api/Analysis/customfunPost";
+        String url = "http://1.1.1.1:3080/api/Analysis/customfunPost";
 //        预防干预sql拼凑
         Params = Params.replaceAll(";", "-");
         JSONArray result = new JSONArray();
