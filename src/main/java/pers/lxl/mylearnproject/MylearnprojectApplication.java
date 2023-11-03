@@ -19,6 +19,10 @@ import org.springframework.web.client.RestTemplate;
  * @EnableAutoConfiguration
  * @ComponentScan 告诉spring在哪去找spring的组件（服务，控制器等），默认扫描当前包下所有子包
  */
+/** 点击左侧按钮可在代码中查看图片，注释中可以添加html代码
+ * The following is the design idea of this class:
+ * <img width="640" height="320" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/legend.png" alt="">
+ */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, MongoAutoConfiguration.class})
 public class MylearnprojectApplication {
     public static void main(String[] args) {
